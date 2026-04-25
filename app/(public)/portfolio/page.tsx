@@ -153,7 +153,7 @@ export default function PortfolioPage() {
                       </div>
                       <div className="flex items-center gap-1 text-zinc-500">
                         <TrendingDown className="w-3.5 h-3.5" />
-                        Testzsir: {item.bodyFat}
+                        Testzsír: {item.bodyFat}
                       </div>
                     </div>
                     <blockquote className="text-sm text-zinc-600 italic border-l-2 border-lime pl-3">
