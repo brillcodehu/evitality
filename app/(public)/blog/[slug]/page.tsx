@@ -36,10 +36,10 @@ export default async function BlogPostPage({
             </span>
             <span className="flex items-center gap-1">
               <CalendarDays className="w-3.5 h-3.5" />
-              2026. aprilis 20.
+              2026. április 20.
             </span>
             <span className="flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5" />5 perc olvasas
+              <Clock className="w-3.5 h-3.5" />5 perc olvasás
             </span>
           </div>
         </div>
@@ -49,44 +49,44 @@ export default async function BlogPostPage({
         <div className="container mx-auto px-4 max-w-3xl">
           <article className="prose prose-lg prose-zinc max-w-none">
             <p className="text-lg text-zinc-600 leading-relaxed">
-              Ez egy placeholder blog cikk tartalom. A valos tartalom az admin
-              feluleten keresztul kerulhet feltoltesre es az adatbazisbol
+              Ez egy placeholder blog cikk tartalom. A valós tartalom az admin
+              felületen keresztül kerülhet feltöltésre és az adatbázisból
               jelenik majd meg.
             </p>
             <h2 className="text-2xl font-bold text-zinc-900 mt-8 mb-4">
-              Bevezetes
+              Bevezetés
             </h2>
             <p className="text-zinc-600 leading-relaxed">
-              Az edzés egy komplex tudomany, amely folyamatosan fejlodik. Ahhoz,
-              hogy a legtobbet hozd ki az edzesboel, fontos megertened az
-              alapelveket es alkalmazni oket a gyakorlatban.
+              Az edzés egy komplex tudomány, amely folyamatosan fejlődik. Ahhoz,
+              hogy a legtöbbet hozd ki az edzésből, fontos megértened az
+              alapelveket és alkalmazni őket a gyakorlatban.
             </p>
             <h2 className="text-2xl font-bold text-zinc-900 mt-8 mb-4">
               A Legfontosabb Szempontok
             </h2>
             <p className="text-zinc-600 leading-relaxed">
-              Az edzés tervezesenel figyelembe kell venni a celokat, az aktualis
-              fitnesz szintet, az egeszsegi allapotot es az eletmod tenyezoket
-              is. Nincs egyseges megoldas, ami mindenkire mukodik.
+              Az edzés tervezésénél figyelembe kell venni a célokat, az aktuális
+              fitnesz szintet, az egészségi állapotot és az életmód tényezőket
+              is. Nincs egységes megoldás, ami mindenkire működik.
             </p>
             <h2 className="text-2xl font-bold text-zinc-900 mt-8 mb-4">
-              Osszefoglalás
+              Összefoglalás
             </h2>
             <p className="text-zinc-600 leading-relaxed">
-              Remelem hasznos volt ez a cikk! Ha kerdesed van, irj bizalommal
-              vagy foglalj egy ingyenes konzultaciot.
+              Remélem hasznos volt ez a cikk! Ha kérdésed van, írj bizalommal
+              vagy foglalj egy ingyenes konzultációt.
             </p>
           </article>
 
           <div className="mt-12 pt-8 border-t border-zinc-200 text-center">
             <p className="text-zinc-500 mb-4">
-              Tetszett a cikk? Foglalj idopontot es beszelgessunk reszletesebben!
+              Tetszett a cikk? Foglalj időpontot és beszélgessünk részletesebben!
             </p>
             <Link
               href="/dashboard/bookings"
               className="inline-flex items-center bg-lime text-zinc-900 font-semibold px-6 py-3 rounded-lg hover:bg-lime-dark transition-colors"
             >
-              Idopontfoglalas
+              Időpontfoglalás
             </Link>
           </div>
         </div>

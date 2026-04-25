@@ -6,19 +6,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const navigationLinks = [
-  { href: "#kezdolap", label: "Kezdőlap" },
-  { href: "#rolam", label: "Rólam" },
-  { href: "#szolgaltatasok", label: "Szolgáltatások" },
-  { href: "#arak", label: "Árak" },
-  { href: "#blog", label: "Blog" },
-  { href: "#kapcsolat", label: "Kapcsolat" },
+  { href: "/", label: "Kezdőlap" },
+  { href: "/about", label: "Rólam" },
+  { href: "/services", label: "Szolgáltatások" },
+  { href: "/pricing", label: "Árak" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Kapcsolat" },
 ];
 
 const serviceLinks = [
-  { href: "#szemelyi-edzes", label: "Személyi edzés" },
-  { href: "#online-coaching", label: "Online coaching" },
-  { href: "#kiscsoportos", label: "Kiscsoportos edzés" },
-  { href: "#taplalkozas", label: "Táplálkozási tanácsadás" },
+  { href: "/services", label: "Személyi edzés" },
+  { href: "/services", label: "Online coaching" },
+  { href: "/services", label: "Kiscsoportos edzés" },
+  { href: "/services", label: "Táplálkozási tanácsadás" },
 ];
 
 function InstagramIcon({ className }: { className?: string }) {

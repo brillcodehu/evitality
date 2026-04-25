@@ -14,12 +14,12 @@ import {
 } from "@/components/ui/sheet";
 
 const navLinks = [
-  { href: "#kezdolap", label: "Kezdőlap" },
-  { href: "#rolam", label: "Rólam" },
-  { href: "#szolgaltatasok", label: "Szolgáltatások" },
-  { href: "#arak", label: "Árak" },
-  { href: "#blog", label: "Blog" },
-  { href: "#kapcsolat", label: "Kapcsolat" },
+  { href: "/", label: "Kezdőlap" },
+  { href: "/about", label: "Rólam" },
+  { href: "/services", label: "Szolgáltatások" },
+  { href: "/pricing", label: "Árak" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Kapcsolat" },
 ];
 
 export function Navbar() {
@@ -67,7 +67,7 @@ export function Navbar() {
 
           {/* Desktop Buttons */}
           <div className="hidden items-center gap-3 lg:flex">
-            <Link href="/bejelentkezes">
+            <Link href="/login">
               <Button
                 variant="ghost"
                 className="text-zinc-300 hover:text-white hover:bg-white/10"
@@ -75,7 +75,7 @@ export function Navbar() {
                 Bejelentkezés
               </Button>
             </Link>
-            <Link href="#idopontfoglalas">
+            <Link href="/dashboard/bookings">
               <Button className="bg-lime text-zinc-950 font-semibold hover:bg-lime-dark rounded-full px-6">
                 Időpontfoglalás
               </Button>
@@ -117,7 +117,7 @@ export function Navbar() {
                     </Link>
                   ))}
                   <div className="mt-4 flex flex-col gap-3 border-t border-zinc-800 pt-4">
-                    <Link href="/bejelentkezes" onClick={() => setMobileOpen(false)}>
+                    <Link href="/login" onClick={() => setMobileOpen(false)}>
                       <Button
                         variant="outline"
                         className="w-full border-zinc-700 text-zinc-300 hover:text-white"
@@ -125,7 +125,7 @@ export function Navbar() {
                         Bejelentkezés
                       </Button>
                     </Link>
-                    <Link href="#idopontfoglalas" onClick={() => setMobileOpen(false)}>
+                    <Link href="/dashboard/bookings" onClick={() => setMobileOpen(false)}>
                       <Button className="w-full bg-lime text-zinc-950 font-semibold hover:bg-lime-dark rounded-full">
                         Időpontfoglalás
                       </Button>

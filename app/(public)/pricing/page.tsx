@@ -11,79 +11,79 @@ const plans = [
   {
     name: "Alap",
     price: "45.000",
-    period: "ho",
-    description: "Onallo edzeshez szakmai hatterrel",
+    period: "hó",
+    description: "Önálló edzéshez szakmai háttérrel",
     features: [
-      "Heti edzesterv",
-      "Havi 2 szemelyi edzes",
-      "Online chat tamogatas",
-      "Haladaskovetes app-ban",
-      "Altalanos taplalkozasi tippek",
+      "Heti edzésterv",
+      "Havi 2 személyi edzés",
+      "Online chat támogatás",
+      "Haladáskövetés app-ban",
+      "Általános táplálkozási tippek",
     ],
     notIncluded: [
-      "Szemelyre szabott etrend",
-      "Video forma ellenorzes",
-      "Prioritasos idopontfoglalas",
+      "Személyre szabott étrend",
+      "Videó forma ellenőrzés",
+      "Prioritásos időpontfoglalás",
     ],
-    cta: "Valasztom",
+    cta: "Választom",
     featured: false,
   },
   {
-    name: "Premium",
+    name: "Prémium",
     price: "85.000",
-    period: "ho",
-    description: "A legnepszerubb csomag komoly eredmenyekert",
+    period: "hó",
+    description: "A legnépszerűbb csomag komoly eredményekért",
     features: [
-      "Szemelyre szabott edzesterv",
-      "Heti 3 szemelyi edzes",
-      "Korlátlan online tamogatas",
-      "Reszletes haladaskovetes",
-      "Szemelyre szabott etrend terv",
-      "Heti video forma ellenorzes",
-      "Prioritasos idopontfoglalas",
+      "Személyre szabott edzésterv",
+      "Heti 3 személyi edzés",
+      "Korlátlan online támogatás",
+      "Részletes haladáskövetés",
+      "Személyre szabott étrend terv",
+      "Heti videó forma ellenőrzés",
+      "Prioritásos időpontfoglalás",
     ],
     notIncluded: [],
-    cta: "Valasztom",
+    cta: "Választom",
     featured: true,
   },
   {
     name: "VIP",
     price: "150.000",
-    period: "ho",
-    description: "Maximalis figyelem es tamogatas",
+    period: "hó",
+    description: "Maximális figyelem és támogatás",
     features: [
-      "Teljesen egyedi edzesterv",
-      "Korlátlan szemelyi edzes",
-      "0-24 elerheto tamogatas",
-      "Reszletes haladaskovetes",
-      "Personalizalt etrend + receptek",
-      "Napi video forma ellenorzes",
-      "VIP idopontfoglalas",
-      "Havi testosszetétel meres",
-      "Supplement tanacsadas",
+      "Teljesen egyedi edzésterv",
+      "Korlátlan személyi edzés",
+      "0-24 elérhető támogatás",
+      "Részletes haladáskövetés",
+      "Personalizált étrend + receptek",
+      "Napi videó forma ellenőrzés",
+      "VIP időpontfoglalás",
+      "Havi testösszetétel mérés",
+      "Supplement tanácsadás",
     ],
     notIncluded: [],
-    cta: "Valasztom",
+    cta: "Választom",
     featured: false,
   },
 ];
 
 const faqs = [
   {
-    q: "Lehet-e csomagot valtani kesobb?",
-    a: "Igen, barmikor valthatsz magasabb vagy alacsonyabb csomagra. A kulonbozet aranyositva szamoljuk.",
+    q: "Lehet-e csomagot váltani később?",
+    a: "Igen, bármikor válthatsz magasabb vagy alacsonyabb csomagra. A különbözetet arányosítva számoljuk.",
   },
   {
-    q: "Van-e elkotelezettseg?",
-    a: "Nincs hosszu tavu szerzodes. Havi elofizetes, amit barmikor lemondhatsz 30 napos felmondasi idovel.",
+    q: "Van-e elkötelezettség?",
+    a: "Nincs hosszú távú szerződés. Havi előfizetés, amit bármikor lemondhatsz 30 napos felmondási idővel.",
   },
   {
-    q: "Mi tortenik ha le kell mondanom egy edzest?",
-    a: "24 oraval az edzes elott ingyenesen lemondhatod. Kesobbi lemondas eseten az alkalom elvesz.",
+    q: "Mi történik ha le kell mondanom egy edzést?",
+    a: "24 órával az edzés előtt ingyenesen lemondhatod. Későbbi lemondás esetén az alkalom elvész.",
   },
   {
-    q: "Hogy nez ki az elso konzultacio?",
-    a: "45 perces ingyenes beszelgetes, ahol megismerjuk a celjaidat, felmerjuk az allapotodat es kialakitjuk a tervet.",
+    q: "Hogy néz ki az első konzultáció?",
+    a: "45 perces ingyenes beszélgetés, ahol megismerjük a céljaidat, felmérjük az állapotodat és kialakítjuk a tervet.",
   },
 ];
 
@@ -100,15 +100,15 @@ export default function PricingPage() {
             transition={{ duration: 0.6 }}
           >
             <Badge className="bg-lime/10 text-lime border-lime/20 mb-4">
-              Arak
+              Árak
             </Badge>
             <h1 className="text-4xl md:text-6xl font-[var(--font-archivo)] font-black text-white mb-6">
-              Atlathatoo Arak,{" "}
-              <span className="text-lime">Rejtett Koltsegek Nelkul</span>
+              Átlátható Árak,{" "}
+              <span className="text-lime">Rejtett Költségek Nélkül</span>
             </h1>
             <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-              Valaszd ki a hozzad legjobban illo csomagot. Minden csomag
-              tartalmazza a mobilalkalmazas hozzaferest.
+              Válaszd ki a hozzád legjobban illő csomagot. Minden csomag
+              tartalmazza a mobilalkalmazás hozzáférést.
             </p>
           </motion.div>
         </div>
@@ -137,7 +137,7 @@ export default function PricingPage() {
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                       <Badge className="bg-lime text-zinc-900 font-semibold px-4 py-1">
                         <Star className="w-3 h-3 mr-1" />
-                        Nepszeru
+                        Népszerű
                       </Badge>
                     </div>
                   )}
@@ -209,7 +209,7 @@ export default function PricingPage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-[var(--font-archivo)] font-black text-zinc-900 mb-4">
-              Gyakran Ismetelt Kerdesek
+              Gyakran Ismételt Kérdések
             </h2>
           </motion.div>
           <div className="space-y-4">

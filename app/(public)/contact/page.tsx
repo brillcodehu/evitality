@@ -21,8 +21,8 @@ import { toast } from "sonner";
 const contactInfo = [
   { icon: Phone, label: "Telefon", value: "+36 30 123 4567" },
   { icon: Mail, label: "Email", value: "info@evitality.hu" },
-  { icon: MapPin, label: "Helyszin", value: "Budapest, XIII. kerulet" },
-  { icon: Clock, label: "Nyitvatartas", value: "H-P: 6:00-21:00, Szo: 8:00-14:00" },
+  { icon: MapPin, label: "Helyszín", value: "Budapest, XIII. kerület" },
+  { icon: Clock, label: "Nyitvatartás", value: "H-P: 6:00-21:00, Szo: 8:00-14:00" },
 ];
 
 function SocialIcon({ type, className }: { type: string; className?: string }) {
@@ -63,7 +63,7 @@ export default function ContactPage() {
     e.preventDefault();
     setLoading(true);
     await new Promise((r) => setTimeout(r, 1000));
-    toast.success("Uzenet elkuldve! Hamarosan valaszolok.");
+    toast.success("Üzenet elküldve! Hamarosan válaszolok.");
     (e.target as HTMLFormElement).reset();
     setLoading(false);
   }
@@ -79,11 +79,11 @@ export default function ContactPage() {
               Kapcsolat
             </Badge>
             <h1 className="text-4xl md:text-6xl font-[var(--font-archivo)] font-black text-white mb-6">
-              Lepj Velem{" "}
+              Lépj Velem{" "}
               <span className="text-lime">Kapcsolatba</span>
             </h1>
             <p className="text-lg text-zinc-400">
-              Kerdesed van? Irj nekam batran, es 24 oran belul valaszolok!
+              Kérdésed van? Írj nekem bátran, és 24 órán belül válaszolok!
             </p>
           </motion.div>
         </div>
@@ -96,7 +96,7 @@ export default function ContactPage() {
             {/* Contact Info */}
             <motion.div {...fadeUp} className="lg:col-span-2 space-y-6">
               <h2 className="text-2xl font-bold text-zinc-900 mb-6">
-                Elerhetosegeim
+                Elérhetőségeim
               </h2>
               {contactInfo.map((item) => (
                 <div key={item.label} className="flex items-start gap-4">
@@ -112,7 +112,7 @@ export default function ContactPage() {
 
               {/* Social Links */}
               <div className="pt-6 border-t border-zinc-200">
-                <p className="text-sm text-zinc-500 mb-3">Kovess a kozossegi median!</p>
+                <p className="text-sm text-zinc-500 mb-3">Kövess a közösségi médián!</p>
                 <div className="flex gap-3">
                   {socials.map((social) => (
                     <a
@@ -136,12 +136,12 @@ export default function ContactPage() {
               <Card className="p-8">
                 <CardContent className="p-0">
                   <h2 className="text-2xl font-bold text-zinc-900 mb-6">
-                    Irj Nekem
+                    Írj Nekem
                   </h2>
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="name">Nev</Label>
+                        <Label htmlFor="name">Név</Label>
                         <Input
                           id="name"
                           name="name"
@@ -155,13 +155,13 @@ export default function ContactPage() {
                           id="email"
                           name="email"
                           type="email"
-                          placeholder="pelda@email.com"
+                          placeholder="példa@email.com"
                           required
                         />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Telefonszam</Label>
+                      <Label htmlFor="phone">Telefonszám</Label>
                       <Input
                         id="phone"
                         name="phone"
@@ -170,20 +170,20 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="subject">Targy</Label>
+                      <Label htmlFor="subject">Tárgy</Label>
                       <Input
                         id="subject"
                         name="subject"
-                        placeholder="Miben segithetek?"
+                        placeholder="Miben segíthetek?"
                         required
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="message">Uzenet</Label>
+                      <Label htmlFor="message">Üzenet</Label>
                       <Textarea
                         id="message"
                         name="message"
-                        placeholder="Ird le reszletesen, miben segithetek..."
+                        placeholder="Írd le részletesen, miben segíthetek..."
                         rows={5}
                         required
                       />
@@ -198,7 +198,7 @@ export default function ContactPage() {
                       ) : (
                         <>
                           <Send className="w-4 h-4 mr-2" />
-                          Uzenet Kuldese
+                          Üzenet Küldése
                         </>
                       )}
                     </Button>
@@ -215,7 +215,7 @@ export default function ContactPage() {
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
             <MapPin className="w-12 h-12 text-zinc-400 mx-auto mb-2" />
-            <p className="text-zinc-500">Google Maps terkep itt jelenik meg</p>
+            <p className="text-zinc-500">Google Maps térkép itt jelenik meg</p>
           </div>
         </div>
       </section>

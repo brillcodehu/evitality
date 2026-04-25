@@ -16,16 +16,16 @@ import Link from "next/link";
 
 const certifications = [
   { name: "NSCA-CPT", description: "Certified Personal Trainer" },
-  { name: "ISSA Nutrition", description: "Taplalkozasi szakerto" },
-  { name: "FMS Level 2", description: "Funkcionalis mozgasszures" },
-  { name: "Kettlebell Instructor", description: "StrongFirst minositett" },
+  { name: "ISSA Nutrition", description: "Táplálkozási szakértő" },
+  { name: "FMS Level 2", description: "Funkcionális mozgásszűrés" },
+  { name: "Kettlebell Instructor", description: "StrongFirst minősített" },
 ];
 
 const milestones = [
-  { icon: Clock, value: "8+", label: "Ev tapasztalat" },
-  { icon: Users, value: "500+", label: "Elegedett ugyfeel" },
-  { icon: Award, value: "12", label: "Szakmai kepesites" },
-  { icon: Target, value: "98%", label: "Cel elerese rata" },
+  { icon: Clock, value: "8+", label: "Év tapasztalat" },
+  { icon: Users, value: "500+", label: "Elégedett ügyfél" },
+  { icon: Award, value: "12", label: "Szakmai képesítés" },
+  { icon: Target, value: "98%", label: "Cél elérése ráta" },
 ];
 
 const fadeUp = {
@@ -44,16 +44,16 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 relative z-10">
           <motion.div {...fadeUp} className="max-w-3xl">
             <Badge className="bg-lime/10 text-lime border-lime/20 mb-4">
-              Rolam
+              Rólam
             </Badge>
             <h1 className="text-4xl md:text-6xl font-[var(--font-archivo)] font-black text-white mb-6">
-              Szenvedely, Tudomany,{" "}
-              <span className="text-lime">Eredmenyek</span>
+              Szenvedély, Tudomány,{" "}
+              <span className="text-lime">Eredmények</span>
             </h1>
             <p className="text-lg text-zinc-400 leading-relaxed">
-              Tobb mint 8 eve segitem az embereket abban, hogy elerjek fitnesz
-              celjaikat. Nem csak edzessel, hanem komplex eletmod-valtoztatasi
-              programokkal, amelyek tudomanyosan megalapozottak es
+              Több mint 8 éve segítem az embereket abban, hogy elérjék fitnesz
+              céljaikat. Nem csak edzéssel, hanem komplex életmód-változtatási
+              programokkal, amelyek tudományosan megalapozottak és
               személyre szabottak.
             </p>
           </motion.div>
@@ -76,7 +76,7 @@ export default function AboutPage() {
                     8+
                   </p>
                   <p className="text-sm font-medium text-zinc-700">
-                    ev tapasztalat
+                    év tapasztalat
                   </p>
                 </div>
               </div>
@@ -87,24 +87,24 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h2 className="text-3xl md:text-4xl font-[var(--font-archivo)] font-black text-zinc-900 mb-6">
-                A Tortenetem
+                A Történetem
               </h2>
               <div className="space-y-4 text-zinc-600 leading-relaxed">
                 <p>
-                  Az edzoi palyam 2018-ban kezdodott, amikor felismertem, hogy a
-                  fitnesz nem csak testedzesrol szol, hanem az egesz eletmod
-                  atalakitasarol. Azota minden nap azon dolgozom, hogy
-                  ugyfeleim a legjobb verziojukka valjanak.
+                  Az edzői pályám 2018-ban kezdődött, amikor felismertem, hogy a
+                  fitnesz nem csak testedzésről szól, hanem az egész életmód
+                  átalakításáról. Azóta minden nap azon dolgozom, hogy
+                  ügyfeleim a legjobb verziójukká váljanak.
                 </p>
                 <p>
-                  Filozofiam egyszerű: nincs ket egyforma ember, ezert nincs ket
-                  egyforma edzesterv sem. Minden programot egyedileg allitok
-                  ossze, figyelembe veve a celjaidat, az egeszsegi allapotodat
-                  es az eletmoddodat.
+                  Filozófiám egyszerű: nincs két egyforma ember, ezért nincs két
+                  egyforma edzésterv sem. Minden programot egyedileg állítok
+                  össze, figyelembe véve a céljaidat, az egészségi állapotodat
+                  és az életmódodat.
                 </p>
                 <p>
-                  Folyamatosan kepzem magam a legujabb sporttudomanyi kutatasok
-                  alapjan, hogy a leheto legjobb szolgaltatast nyujthassam.
+                  Folyamatosan képzem magam a legújabb sporttudományi kutatások
+                  alapján, hogy a lehető legjobb szolgáltatást nyújthassam.
                 </p>
               </div>
               <Link href="/contact">
@@ -149,10 +149,10 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <motion.div {...fadeUp} className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-[var(--font-archivo)] font-black text-zinc-900 mb-4">
-              Kepesiteseim
+              Képesítéseim
             </h2>
             <p className="text-zinc-500 max-w-xl mx-auto">
-              Folyamatosan fejlesztem tudasomat a legjobb eredmenyek erdekeben
+              Folyamatosan fejlesztem tudásomat a legjobb eredmények érdekében
             </p>
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -181,14 +181,14 @@ export default function AboutPage() {
       <section className="py-16 bg-lime">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-[var(--font-archivo)] font-black text-zinc-900 mb-4">
-            Kesz Vagy Elkezdeni?
+            Kész Vagy Elkezdeni?
           </h2>
           <p className="text-zinc-700 mb-8 max-w-xl mx-auto">
-            Foglalj egy ingyenes konzultaciot, es beszelgessunk a celjaidrol!
+            Foglalj egy ingyenes konzultációt, és beszélgessünk a céljaidról!
           </p>
           <Link href="/dashboard/bookings">
             <Button className="bg-zinc-900 text-white hover:bg-zinc-800 font-semibold px-8 py-3 text-lg">
-              Ingyenes Konzultacio
+              Ingyenes Konzultáció
             </Button>
           </Link>
         </div>

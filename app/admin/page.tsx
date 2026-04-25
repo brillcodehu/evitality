@@ -14,99 +14,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { CalendarDays, Users, Wallet, TrendingUp } from "lucide-react";
-
-const stats = [
-  {
-    label: "Mai edzések",
-    value: "4",
-    icon: CalendarDays,
-    description: "2 személyi, 1 csoportos, 1 online",
-  },
-  {
-    label: "Aktív ügyfelek",
-    value: "23",
-    icon: Users,
-    description: "+3 az elmúlt hónapban",
-  },
-  {
-    label: "Heti bevétel",
-    value: "185.000 Ft",
-    icon: Wallet,
-    description: "+12% az előző héthez képest",
-  },
-  {
-    label: "Foglalási ráta",
-    value: "92%",
-    icon: TrendingUp,
-    description: "Az elmúlt 30 nap átlaga",
-  },
-];
-
-const todaySessions = [
-  {
-    time: "08:00 - 09:00",
-    client: "Kovács Anna",
-    type: "Személyi edzés",
-    status: "confirmed",
-  },
-  {
-    time: "09:30 - 10:30",
-    client: "Tóth Péter",
-    type: "Személyi edzés",
-    status: "confirmed",
-  },
-  {
-    time: "11:00 - 12:00",
-    client: "Csoportos edzés",
-    type: "Csoportos (6/8 fő)",
-    status: "confirmed",
-  },
-  {
-    time: "17:00 - 18:00",
-    client: "Szabó Eszter",
-    type: "Online konzultáció",
-    status: "confirmed",
-  },
-];
-
-const recentBookings = [
-  {
-    date: "2026-04-23",
-    time: "08:00",
-    client: "Kovács Anna",
-    type: "Személyi edzés",
-    status: "confirmed",
-  },
-  {
-    date: "2026-04-23",
-    time: "09:30",
-    client: "Tóth Péter",
-    type: "Személyi edzés",
-    status: "confirmed",
-  },
-  {
-    date: "2026-04-24",
-    time: "10:00",
-    client: "Nagy László",
-    type: "Személyi edzés",
-    status: "confirmed",
-  },
-  {
-    date: "2026-04-24",
-    time: "16:00",
-    client: "Varga Júlia",
-    type: "Online konzultáció",
-    status: "cancelled",
-  },
-  {
-    date: "2026-04-25",
-    time: "08:00",
-    client: "Kiss Gábor",
-    type: "Személyi edzés",
-    status: "confirmed",
-  },
-];
+import { CalendarDays, Users, TrendingUp, Calendar } from "lucide-react";
+import { db } from "@/lib/db";
+import { bookings, availabilitySlots, users } from "@/lib/db/schema";
+import { eq, and, count, sql, desc } from "drizzle-orm";
 
 function StatusBadge({ status }: { status: string }) {
   const variants: Record<string, { label: string; className: string }> = {
@@ -122,6 +33,10 @@ function StatusBadge({ status }: { status: string }) {
       label: "Teljesítve",
       className: "bg-zinc-500/10 text-zinc-600 border-zinc-500/20",
     },
+    noshow: {
+      label: "Nem jelent meg",
+      className: "bg-orange-500/10 text-orange-600 border-orange-500/20",
+    },
   };
 
   const v = variants[status] || variants.confirmed;
@@ -133,7 +48,121 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
-export default function AdminDashboard() {
+const sessionTypeLabels: Record<string, string> = {
+  personal: "Személyi edzés",
+  group: "Csoportos edzés",
+  online: "Online konzultáció",
+};
+
+export default async function AdminDashboard() {
+  const today = new Date().toISOString().split("T")[0];
+
+  // A hét elejét (hétfő) kiszámoljuk
+  const now = new Date();
+  const dayOfWeek = now.getDay();
+  const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+  const monday = new Date(now);
+  monday.setDate(now.getDate() + mondayOffset);
+  const weekStart = monday.toISOString().split("T")[0];
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+  const weekEnd = sunday.toISOString().split("T")[0];
+
+  // Lekérdezések párhuzamosan
+  const [
+    todayConfirmedResult,
+    activeClientsResult,
+    weekBookingsResult,
+    todaySessionsResult,
+    recentBookingsResult,
+  ] = await Promise.all([
+    // Mai megerősített foglalások száma
+    db
+      .select({ count: count() })
+      .from(bookings)
+      .where(
+        and(eq(bookings.date, today), eq(bookings.status, "confirmed"))
+      ),
+
+    // Aktív ügyfelek száma
+    db
+      .select({ count: count() })
+      .from(users)
+      .where(and(eq(users.role, "client"), eq(users.isActive, true))),
+
+    // Heti foglalások száma
+    db
+      .select({ count: count() })
+      .from(bookings)
+      .where(
+        sql`${bookings.date} >= ${weekStart} AND ${bookings.date} <= ${weekEnd}`
+      ),
+
+    // Mai edzések (foglalások + ügyfél nevek + slot adatok)
+    db
+      .select({
+        id: bookings.id,
+        date: bookings.date,
+        status: bookings.status,
+        clientName: users.name,
+        startTime: availabilitySlots.startTime,
+        endTime: availabilitySlots.endTime,
+        sessionType: availabilitySlots.sessionType,
+      })
+      .from(bookings)
+      .innerJoin(users, eq(bookings.clientId, users.id))
+      .innerJoin(availabilitySlots, eq(bookings.slotId, availabilitySlots.id))
+      .where(eq(bookings.date, today))
+      .orderBy(availabilitySlots.startTime),
+
+    // Utolsó 10 foglalás
+    db
+      .select({
+        id: bookings.id,
+        date: bookings.date,
+        status: bookings.status,
+        clientName: users.name,
+        startTime: availabilitySlots.startTime,
+        sessionType: availabilitySlots.sessionType,
+      })
+      .from(bookings)
+      .innerJoin(users, eq(bookings.clientId, users.id))
+      .innerJoin(availabilitySlots, eq(bookings.slotId, availabilitySlots.id))
+      .orderBy(desc(bookings.date), desc(availabilitySlots.startTime))
+      .limit(10),
+  ]);
+
+  const todayConfirmed = todayConfirmedResult[0]?.count ?? 0;
+  const activeClients = activeClientsResult[0]?.count ?? 0;
+  const weekBookings = weekBookingsResult[0]?.count ?? 0;
+
+  const stats = [
+    {
+      label: "Mai edzések",
+      value: todayConfirmed.toString(),
+      icon: CalendarDays,
+      description: `${today} - megerősített foglalások`,
+    },
+    {
+      label: "Aktív ügyfelek",
+      value: activeClients.toString(),
+      icon: Users,
+      description: "Regisztrált, aktív ügyfelek",
+    },
+    {
+      label: "Heti foglalások",
+      value: weekBookings.toString(),
+      icon: Calendar,
+      description: `${weekStart} - ${weekEnd}`,
+    },
+    {
+      label: "Mai program",
+      value: todaySessionsResult.length.toString(),
+      icon: TrendingUp,
+      description: "Összes mai foglalás",
+    },
+  ];
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -178,27 +207,35 @@ export default function AdminDashboard() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
-              {todaySessions.map((session, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between rounded-lg border border-zinc-100 bg-zinc-50/50 p-3"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="w-28 text-sm font-medium text-zinc-700">
-                      {session.time}
+            {todaySessionsResult.length === 0 ? (
+              <p className="py-8 text-center text-sm text-zinc-400">
+                Nincs mai foglalás
+              </p>
+            ) : (
+              <div className="space-y-3">
+                {todaySessionsResult.map((session) => (
+                  <div
+                    key={session.id}
+                    className="flex items-center justify-between rounded-lg border border-zinc-100 bg-zinc-50/50 p-3"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-28 text-sm font-medium text-zinc-700">
+                        {session.startTime?.slice(0, 5)} - {session.endTime?.slice(0, 5)}
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-zinc-900">
+                          {session.clientName || "Ismeretlen"}
+                        </p>
+                        <p className="text-xs text-zinc-500">
+                          {sessionTypeLabels[session.sessionType] || session.sessionType}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-zinc-900">
-                        {session.client}
-                      </p>
-                      <p className="text-xs text-zinc-500">{session.type}</p>
-                    </div>
+                    <StatusBadge status={session.status} />
                   </div>
-                  <StatusBadge status={session.status} />
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </CardContent>
         </Card>
 
@@ -208,39 +245,43 @@ export default function AdminDashboard() {
             <CardTitle className="text-lg font-semibold text-zinc-900">
               Legutóbbi foglalások
             </CardTitle>
-            <CardDescription>
-              Az elmúlt napok foglalásai
-            </CardDescription>
+            <CardDescription>Az elmúlt napok foglalásai</CardDescription>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Dátum</TableHead>
-                  <TableHead>Ügyfél</TableHead>
-                  <TableHead>Típus</TableHead>
-                  <TableHead className="text-right">Státusz</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {recentBookings.map((booking, i) => (
-                  <TableRow key={i}>
-                    <TableCell className="text-sm">
-                      {booking.date} {booking.time}
-                    </TableCell>
-                    <TableCell className="text-sm font-medium">
-                      {booking.client}
-                    </TableCell>
-                    <TableCell className="text-sm text-zinc-500">
-                      {booking.type}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <StatusBadge status={booking.status} />
-                    </TableCell>
+            {recentBookingsResult.length === 0 ? (
+              <p className="py-8 text-center text-sm text-zinc-400">
+                Nincsenek foglalások
+              </p>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Dátum</TableHead>
+                    <TableHead>Ügyfél</TableHead>
+                    <TableHead>Típus</TableHead>
+                    <TableHead className="text-right">Státusz</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {recentBookingsResult.map((booking) => (
+                    <TableRow key={booking.id}>
+                      <TableCell className="text-sm">
+                        {booking.date} {booking.startTime?.slice(0, 5)}
+                      </TableCell>
+                      <TableCell className="text-sm font-medium">
+                        {booking.clientName || "Ismeretlen"}
+                      </TableCell>
+                      <TableCell className="text-sm text-zinc-500">
+                        {sessionTypeLabels[booking.sessionType] || booking.sessionType}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <StatusBadge status={booking.status} />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
           </CardContent>
         </Card>
       </div>

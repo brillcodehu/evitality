@@ -20,14 +20,14 @@ import Link from "next/link";
 const services = [
   {
     icon: Dumbbell,
-    title: "Szemelyi Edzes",
+    title: "Személyi Edzés",
     description:
-      "Egyeni edzesprogram, teljes figyelemmel radfordulva. Minden alkalommal ellenorzom a technikad es alkalmazkodom a haladásodhoz.",
+      "Egyéni edzésprogram, teljes figyelemmel rádfordulva. Minden alkalommal ellenőrzöm a technikád és alkalmazkodom a haladásodhoz.",
     features: [
-      "Szemelyre szabott edzesterv",
+      "Személyre szabott edzésterv",
       "Technika korrekció valós időben",
-      "Haladaskovetes es program modositas",
-      "Motivacio es accountability",
+      "Haladáskövetés és program módosítás",
+      "Motiváció és accountability",
     ],
     price: "12.000 Ft / alkalom",
     color: "from-lime/20 to-lime/5",
@@ -36,42 +36,42 @@ const services = [
     icon: Monitor,
     title: "Online Coaching",
     description:
-      "Tavoli edzesterv es tanacsadas, rugalmas idobeosztassal. Idealis azoknak, akik onalloan edzenek, de szakmai iranymutatast szeretnenek.",
+      "Távoli edzésterv és tanácsadás, rugalmas időbeosztással. Ideális azoknak, akik önállóan edzenek, de szakmai iránymutatást szeretnének.",
     features: [
-      "Heti edzesterv kuldese",
-      "Video forma ellenorzes",
-      "Chat tamogatas munkanap0kon",
-      "Havi haladasertekeles",
+      "Heti edzésterv küldése",
+      "Videó forma ellenőrzés",
+      "Chat támogatás munkanapokon",
+      "Havi haladásértékelés",
     ],
-    price: "45.000 Ft / ho",
+    price: "45.000 Ft / hó",
     color: "from-blue-500/20 to-blue-500/5",
   },
   {
     icon: Users,
-    title: "Kiscsoportos Edzes",
+    title: "Kiscsoportos Edzés",
     description:
-      "3-6 fos csoportban edzunk, kozossegi elmeny es kolcsonos motivacio mellett. Hatekony es kedvezo aru lehetoseg.",
+      "3-6 fős csoportban edzünk, közösségi élmény és kölcsönös motiváció mellett. Hatékony és kedvező árú lehetőség.",
     features: [
-      "Max. 6 fos kiscsoportok",
-      "Valtozatos edzesprogramok",
-      "Kozossegi motivacio",
-      "Kedvezo ar/ertek arany",
+      "Max. 6 fős kiscsoportok",
+      "Változatos edzésprogramok",
+      "Közösségi motiváció",
+      "Kedvező ár/érték arány",
     ],
     price: "5.000 Ft / alkalom",
     color: "from-purple-500/20 to-purple-500/5",
   },
   {
     icon: Apple,
-    title: "Taplalkozasi Tanacsadas",
+    title: "Táplálkozási Tanácsadás",
     description:
-      "Szemelyre szabott etrend terv a celjaidhoz igazitva. Nem dieta, hanem fenntarthato eletmod valtozas.",
+      "Személyre szabott étrend terv a céljaidhoz igazítva. Nem diéta, hanem fenntartható életmód változás.",
     features: [
-      "Reszletes etrend terv",
-      "Makronutriens szamitas",
-      "Bevasarlolistak es receptek",
-      "Heti konzultacio",
+      "Részletes étrend terv",
+      "Makronutriens számítás",
+      "Bevásárlólisták és receptek",
+      "Heti konzultáció",
     ],
-    price: "35.000 Ft / ho",
+    price: "35.000 Ft / hó",
     color: "from-orange-500/20 to-orange-500/5",
   },
 ];
@@ -79,17 +79,17 @@ const services = [
 const benefits = [
   {
     icon: Zap,
-    title: "Gyors Eredmenyek",
-    description: "Tudományosan megalapozott modszerekkel gyorsabb haladas",
+    title: "Gyors Eredmények",
+    description: "Tudományosan megalapozott módszerekkel gyorsabb haladás",
   },
   {
     icon: Heart,
-    title: "Egeszseg Elsoben",
-    description: "Biztonsagos, serulesmentes edzesterv mindenkinek",
+    title: "Egészség Elsőben",
+    description: "Biztonságos, sérülésmentes edzésterv mindenkinek",
   },
   {
     icon: Brain,
-    title: "Mentalis Erosites",
+    title: "Mentális Erősítés",
     description: "Nem csak a test, hanem az elme is edződik",
   },
 ];
@@ -110,15 +110,15 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4 relative z-10">
           <motion.div {...fadeUp} className="max-w-3xl">
             <Badge className="bg-lime/10 text-lime border-lime/20 mb-4">
-              Szolgaltatasok
+              Szolgáltatások
             </Badge>
             <h1 className="text-4xl md:text-6xl font-[var(--font-archivo)] font-black text-white mb-6">
-              Valaszd Ki A{" "}
-              <span className="text-lime">Hozzad Illo</span> Programot
+              Válaszd Ki A{" "}
+              <span className="text-lime">Hozzád Illő</span> Programot
             </h1>
             <p className="text-lg text-zinc-400 leading-relaxed">
-              Legyen szó fogyasrol, izomepitesrol vagy altalanos fitnesz
-              javitasrol, megtalaljuk a szamodra tokeletes megoldast.
+              Legyen szó fogyásról, izomépítésről vagy általános fitnesz
+              javításról, megtaláljuk a számodra tökéletes megoldást.
             </p>
           </motion.div>
         </div>
@@ -173,7 +173,7 @@ export default function ServicesPage() {
                         variant="outline"
                         className="w-full mt-2 border-lime/30 text-lime hover:bg-lime/5 group"
                       >
-                        Reszletek
+                        Részletek
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </Link>
@@ -190,7 +190,7 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4">
           <motion.div {...fadeUp} className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-[var(--font-archivo)] font-black text-white mb-4">
-              Miert Valaszd Az <span className="text-lime">eVitality</span>-t?
+              Miért Válaszd Az <span className="text-lime">eVitality</span>-t?
             </h2>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -220,16 +220,16 @@ export default function ServicesPage() {
       <section className="py-16 bg-lime">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-[var(--font-archivo)] font-black text-zinc-900 mb-4">
-            Kezdjuk El Egyutt!
+            Kezdjük El Együtt!
           </h2>
           <p className="text-zinc-700 mb-8 max-w-xl mx-auto">
-            Az elso konzultacio ingyenes. Ismerkedj meg a modszereimmel es
-            beszelgessunk a celjaidrol!
+            Az első konzultáció ingyenes. Ismerkedj meg a módszereimmel és
+            beszélgessünk a céljaidról!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/dashboard/bookings">
               <Button className="bg-zinc-900 text-white hover:bg-zinc-800 font-semibold px-8 py-3 text-lg">
-                Foglalj Idopontot
+                Foglalj Időpontot
               </Button>
             </Link>
             <Link href="/pricing">
@@ -237,7 +237,7 @@ export default function ServicesPage() {
                 variant="outline"
                 className="border-zinc-900 text-zinc-900 hover:bg-zinc-900/10 font-semibold px-8 py-3 text-lg"
               >
-                Csomagok es Arak
+                Csomagok és Árak
               </Button>
             </Link>
           </div>

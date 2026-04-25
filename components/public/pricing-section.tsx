@@ -153,7 +153,7 @@ export function PricingSection() {
               </ul>
 
               <div className="mt-8">
-                <Link href="#idopontfoglalas">
+                <Link href="/dashboard/bookings">
                   <Button
                     className={`w-full rounded-full h-11 text-base font-semibold ${
                       plan.featured

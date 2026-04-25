@@ -27,12 +27,12 @@ export default function LoginPage() {
     });
 
     if (result?.error) {
-      toast.error("Hibas email vagy jelszo");
+      toast.error("Hibás email vagy jelszó");
       setLoading(false);
       return;
     }
 
-    toast.success("Sikeres bejelentkezes!");
+    toast.success("Sikeres bejelentkezés!");
     router.push("/dashboard");
     router.refresh();
   }
@@ -46,7 +46,7 @@ export default function LoginPage() {
           </span>
         </Link>
         <p className="text-zinc-400 text-sm">
-          Jelentkezz be a fiokodba
+          Jelentkezz be a fiókodba
         </p>
       </CardHeader>
       <CardContent>
@@ -69,7 +69,7 @@ export default function LoginPage() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="password" className="text-zinc-300">
-              Jelszo
+              Jelszó
             </Label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
@@ -77,7 +77,7 @@ export default function LoginPage() {
                 id="password"
                 name="password"
                 type="password"
-                placeholder="Jelszo"
+                placeholder="Jelszó"
                 required
                 className="pl-10 bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
               />
@@ -91,14 +91,14 @@ export default function LoginPage() {
             {loading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
-              "Bejelentkezes"
+              "Bejelentkezés"
             )}
           </Button>
         </form>
         <p className="text-center text-sm text-zinc-500 mt-4">
-          Meg nincs fiokod?{" "}
+          Még nincs fiókod?{" "}
           <Link href="/register" className="text-lime hover:underline">
-            Regisztracio
+            Regisztráció
           </Link>
         </p>
       </CardContent>

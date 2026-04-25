@@ -9,56 +9,56 @@ import Link from "next/link";
 const posts = [
   {
     slug: "5-legfontosabb-gyakorlat-kezdoknek",
-    title: "Az 5 Legfontosabb Gyakorlat Kezdoknek",
+    title: "Az 5 Legfontosabb Gyakorlat Kezdőknek",
     excerpt:
-      "Ha most kezded az edzest, ezzel az 5 alapgyakorlattal epitsd fel a fundamentumot. Minden izomcsoportot lefednek es biztonsagosan vegezhetok.",
+      "Ha most kezded az edzést, ezzel az 5 alapgyakorlattal építsd fel a fundamentumot. Minden izomcsoportot lefednek és biztonságosan végezhetők.",
     category: "Edzés",
-    date: "2026. aprilis 20.",
+    date: "2026. április 20.",
     readTime: "5 perc",
   },
   {
     slug: "feherje-bevitel-optimalizalasa",
-    title: "Feherje Bevitel Optimalizalasa: Mennyire Van Szukseged?",
+    title: "Fehérje Bevitel Optimalizálása: Mennyire Van Szükséged?",
     excerpt:
-      "A feherje a legfontosabb makronutriens az izomepites es a regeneracio szempontjabol. De mennyit fogyasszunk naponta?",
-    category: "Taplalkozas",
-    date: "2026. aprilis 15.",
+      "A fehérje a legfontosabb makronutriens az izomépítés és a regeneráció szempontjából. De mennyit fogyasszunk naponta?",
+    category: "Táplálkozás",
+    date: "2026. április 15.",
     readTime: "7 perc",
   },
   {
     slug: "hogyan-keruldd-el-a-serulest",
-    title: "Hogyan Keruldd El A Serulest Az Edzoteremben",
+    title: "Hogyan Kerüld El A Sérülést Az Edzőteremben",
     excerpt:
-      "A serules megelozese ugyanolyan fontos, mint maga az edzes. Mutatom a leggyakoribb hibakat es hogyan kerulheted el oket.",
-    category: "Egeszség",
-    date: "2026. aprilis 10.",
+      "A sérülés megelőzése ugyanolyan fontos, mint maga az edzés. Mutatom a leggyakoribb hibákat és hogyan kerülheted el őket.",
+    category: "Egészség",
+    date: "2026. április 10.",
     readTime: "6 perc",
   },
   {
     slug: "miert-fontos-az-alvas",
-    title: "Miert Fontos Az Alvas A Fitnesz Celok Elereseben?",
+    title: "Miért Fontos Az Alvás A Fitnesz Célok Elérésében?",
     excerpt:
-      "Az alvas az egyik legalabecsultebb tenyezo a fitnesz vilagaban. Tobb kutatas is bizonyitja, hogy az alvas minosege kozvetlen hatassal van az edzesi eredmenyekre.",
-    category: "Eletmod",
-    date: "2026. aprilis 5.",
+      "Az alvás az egyik legalábecsültebb tényező a fitnesz világában. Több kutatás is bizonyítja, hogy az alvás minősége közvetlen hatással van az edzési eredményekre.",
+    category: "Életmód",
+    date: "2026. április 5.",
     readTime: "4 perc",
   },
   {
     slug: "hiit-vs-liss-kardio",
-    title: "HIIT vs. LISS Kardio: Melyik A Jobb Fogyas Szempontjabol?",
+    title: "HIIT vs. LISS Kardió: Melyik A Jobb Fogyás Szempontjából?",
     excerpt:
-      "Ket nepszeru kardio modszer, ket kulonbozo megkozelites. Megvizsgaljuk, melyik hatekonyabb a zsiregetesben.",
+      "Két népszerű kardió módszer, két különböző megközelítés. Megvizsgáljuk, melyik hatékonyabb a zsírégetésben.",
     category: "Edzés",
-    date: "2026. marcius 28.",
+    date: "2026. március 28.",
     readTime: "8 perc",
   },
   {
     slug: "stresszkezeles-es-kortizol",
-    title: "Stresszkezeles Es Kortizol: Hogyan Hat A Testsulyadra?",
+    title: "Stresszkezelés És Kortizol: Hogyan Hat A Testsúlyadra?",
     excerpt:
-      "A kronikus stressz a kortizolszint emelkedeset okozza, ami hozzajarulhat a hasi zsir felszaporodasahoz. Mutatom, mit tehetsz ellene.",
-    category: "Egeszség",
-    date: "2026. marcius 20.",
+      "A krónikus stressz a kortizolszint emelkedését okozza, ami hozzájárulhat a hasi zsír felszaporodásához. Mutatom, mit tehetsz ellene.",
+    category: "Egészség",
+    date: "2026. március 20.",
     readTime: "5 perc",
   },
 ];
@@ -79,12 +79,12 @@ export default function BlogPage() {
               Blog
             </Badge>
             <h1 className="text-4xl md:text-6xl font-[var(--font-archivo)] font-black text-white mb-6">
-              Tippek, Trukkok,{" "}
-              <span className="text-lime">Tudomany</span>
+              Tippek, Trükkök,{" "}
+              <span className="text-lime">Tudomány</span>
             </h1>
             <p className="text-lg text-zinc-400 max-w-2xl">
-              Cikkek edzesrol, taplalkozasrol es egeszseges eletmodrol, hogy
-              jobban megertsd a testedet es hatekonyabban edzhess.
+              Cikkek edzésről, táplálkozásról és egészséges életmódról, hogy
+              jobban megértsd a testedet és hatékonyabban edzhess.
             </p>
           </motion.div>
         </div>
@@ -131,7 +131,7 @@ export default function BlogPage() {
                         {post.excerpt}
                       </p>
                       <span className="inline-flex items-center text-sm text-lime font-medium group-hover:gap-2 transition-all">
-                        Tovabb olvasom
+                        Tovább olvasom
                         <ArrowRight className="w-4 h-4 ml-1" />
                       </span>
                     </CardContent>

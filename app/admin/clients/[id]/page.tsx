@@ -1,8 +1,6 @@
-"use client";
-
-import { useParams } from "next/navigation";
-import { ArrowLeft, Mail, Phone, MapPin, Target, Heart } from "lucide-react";
+import { notFound } from "next/navigation";
 import Link from "next/link";
+import { ArrowLeft, Mail, Phone, Target, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,102 +19,115 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { db } from "@/lib/db";
+import {
+  users,
+  clientProfiles,
+  bookings,
+  availabilitySlots,
+  measurements,
+} from "@/lib/db/schema";
+import { eq, desc } from "drizzle-orm";
 
-const clientData: Record<
-  string,
-  {
-    name: string;
-    email: string;
-    phone: string;
-    address: string;
-    birthDate: string;
-    status: string;
-    package: string;
-    startDate: string;
-    goals: string[];
-    healthConditions: string[];
-    notes: string;
+export default async function ClientDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
+  // Felhasználó lekérdezése
+  const [user] = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, id))
+    .limit(1);
+
+  if (!user || user.role !== "client") {
+    notFound();
   }
-> = {
-  "1": {
-    name: "Kovács Anna",
-    email: "kovacs.anna@example.com",
-    phone: "+36 30 123 4567",
-    address: "Budapest, Váci út 12.",
-    birthDate: "1992-05-14",
-    status: "active",
-    package: "Havi 8 alkalom",
-    startDate: "2025-09-01",
-    goals: ["Fogyás", "Állóképesség fejlesztés", "Stresszkezelés"],
-    healthConditions: ["Enyhe térdproblémák"],
-    notes:
-      "Motivált, rendszeresen jár. Hétfő és szerda délelőttöket preferálja.",
-  },
-  "2": {
-    name: "Tóth Péter",
-    email: "toth.peter@example.com",
-    phone: "+36 20 234 5678",
-    address: "Budapest, Andrássy út 45.",
-    birthDate: "1988-11-22",
-    status: "active",
-    package: "Havi 12 alkalom",
-    startDate: "2025-06-15",
-    goals: ["Izomépítés", "Erőnövelés"],
-    healthConditions: [],
-    notes: "Haladó szint, versenyekre készül.",
-  },
-};
 
-const measurements = [
-  { date: "2026-04-15", weight: 68.5, chest: 92, waist: 72, hip: 96, arm: 28, bodyFat: 22.1 },
-  { date: "2026-03-15", weight: 69.8, chest: 93, waist: 74, hip: 97, arm: 27.5, bodyFat: 23.4 },
-  { date: "2026-02-15", weight: 71.2, chest: 94, waist: 76, hip: 98, arm: 27, bodyFat: 24.8 },
-  { date: "2026-01-15", weight: 72.5, chest: 95, waist: 78, hip: 99, arm: 26.5, bodyFat: 26.1 },
-  { date: "2025-12-15", weight: 73.0, chest: 95, waist: 79, hip: 99, arm: 26, bodyFat: 26.8 },
-];
+  // Párhuzamos lekérdezések
+  const [profileResult, bookingsResult, measurementsResult] = await Promise.all(
+    [
+      // Ügyfél profil
+      db
+        .select()
+        .from(clientProfiles)
+        .where(eq(clientProfiles.userId, id))
+        .limit(1),
 
-const bookings = [
-  { date: "2026-04-23", time: "08:00", type: "Személyi edzés", status: "confirmed" },
-  { date: "2026-04-21", time: "08:00", type: "Személyi edzés", status: "completed" },
-  { date: "2026-04-18", time: "09:00", type: "Személyi edzés", status: "completed" },
-  { date: "2026-04-16", time: "08:00", type: "Személyi edzés", status: "completed" },
-  { date: "2026-04-14", time: "08:00", type: "Személyi edzés", status: "cancelled" },
-];
+      // Legutóbbi foglalások
+      db
+        .select({
+          id: bookings.id,
+          date: bookings.date,
+          status: bookings.status,
+          startTime: availabilitySlots.startTime,
+          endTime: availabilitySlots.endTime,
+          sessionType: availabilitySlots.sessionType,
+        })
+        .from(bookings)
+        .innerJoin(
+          availabilitySlots,
+          eq(bookings.slotId, availabilitySlots.id)
+        )
+        .where(eq(bookings.clientId, id))
+        .orderBy(desc(bookings.date))
+        .limit(20),
 
-const trainingPlan = [
-  { day: "Hétfő", focus: "Alsó test", exercises: "Guggolás, Kitörés, Lábtolás, Román húzás", sets: "4x12" },
-  { day: "Szerda", focus: "Felső test", exercises: "Fekvenyomás, Húzódzkodás, Vállnyomás, Evezés", sets: "4x10" },
-  { day: "Péntek", focus: "Teljes test + Kardió", exercises: "Kettlebell swing, Burpee, Box jump, Planking", sets: "3x15" },
-];
+      // Legutóbbi mérések
+      db
+        .select()
+        .from(measurements)
+        .where(eq(measurements.clientId, id))
+        .orderBy(desc(measurements.date))
+        .limit(10),
+    ]
+  );
 
-export default function ClientDetailPage() {
-  const params = useParams();
-  const id = params.id as string;
-  const client = clientData[id] || clientData["1"];
+  const profile = profileResult[0] || null;
+
+  const sessionTypeLabels: Record<string, string> = {
+    personal: "Személyi edzés",
+    group: "Csoportos edzés",
+    online: "Online konzultáció",
+  };
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <Link href="/admin/clients" className="inline-flex items-center justify-center rounded-md text-sm font-medium h-10 w-10 hover:bg-accent hover:text-accent-foreground focus-visible:outline-none">
-            <ArrowLeft className="h-5 w-5" />
+        <Link
+          href="/admin/clients"
+          className="inline-flex items-center justify-center rounded-md text-sm font-medium h-10 w-10 hover:bg-accent hover:text-accent-foreground focus-visible:outline-none"
+        >
+          <ArrowLeft className="h-5 w-5" />
         </Link>
         <div className="flex-1">
           <h1 className="font-heading text-3xl tracking-tight text-zinc-900">
-            {client.name}
+            {user.name || "Névtelen ügyfél"}
           </h1>
           <div className="mt-1 flex items-center gap-3">
             <Badge
               variant="outline"
               className={
-                client.status === "active"
+                user.isActive
                   ? "bg-lime/20 text-lime-dark border-lime/30"
                   : "bg-zinc-100 text-zinc-500 border-zinc-200"
               }
             >
-              {client.status === "active" ? "Aktív" : "Inaktív"}
+              {user.isActive ? "Aktív" : "Inaktív"}
             </Badge>
-            <span className="text-sm text-zinc-500">{client.package}</span>
+            {profile?.fitnessLevel && (
+              <span className="text-sm text-zinc-500">
+                {profile.fitnessLevel === "beginner"
+                  ? "Kezdő"
+                  : profile.fitnessLevel === "intermediate"
+                    ? "Középhaladó"
+                    : "Haladó"}
+              </span>
+            )}
           </div>
         </div>
         <Button className="bg-lime text-zinc-900 hover:bg-lime-dark">
@@ -128,7 +139,6 @@ export default function ClientDetailPage() {
       <Tabs defaultValue="profile" className="space-y-6">
         <TabsList>
           <TabsTrigger value="profile">Profil</TabsTrigger>
-          <TabsTrigger value="training">Edzésterv</TabsTrigger>
           <TabsTrigger value="measurements">Mérések</TabsTrigger>
           <TabsTrigger value="bookings">Foglalások</TabsTrigger>
           <TabsTrigger value="documents">Dokumentumok</TabsTrigger>
@@ -144,29 +154,51 @@ export default function ClientDetailPage() {
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Mail className="h-4 w-4 text-zinc-400" />
-                  <span className="text-sm text-zinc-700">{client.email}</span>
+                  <span className="text-sm text-zinc-700">{user.email}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="h-4 w-4 text-zinc-400" />
-                  <span className="text-sm text-zinc-700">{client.phone}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-4 w-4 text-zinc-400" />
                   <span className="text-sm text-zinc-700">
-                    {client.address}
+                    {user.phone || "Nincs megadva"}
                   </span>
                 </div>
-                <div className="pt-2 text-sm text-zinc-500">
-                  <span className="font-medium text-zinc-700">
-                    Születési dátum:
-                  </span>{" "}
-                  {client.birthDate}
-                </div>
+                {profile?.dateOfBirth && (
+                  <div className="pt-2 text-sm text-zinc-500">
+                    <span className="font-medium text-zinc-700">
+                      Születési dátum:
+                    </span>{" "}
+                    {profile.dateOfBirth}
+                  </div>
+                )}
+                {profile?.gender && (
+                  <div className="text-sm text-zinc-500">
+                    <span className="font-medium text-zinc-700">Nem:</span>{" "}
+                    {profile.gender === "male"
+                      ? "Férfi"
+                      : profile.gender === "female"
+                        ? "Nő"
+                        : profile.gender}
+                  </div>
+                )}
+                {profile?.height && (
+                  <div className="text-sm text-zinc-500">
+                    <span className="font-medium text-zinc-700">
+                      Magasság:
+                    </span>{" "}
+                    {profile.height} cm
+                  </div>
+                )}
+                {profile?.weight && (
+                  <div className="text-sm text-zinc-500">
+                    <span className="font-medium text-zinc-700">
+                      Testsúly:
+                    </span>{" "}
+                    {profile.weight} kg
+                  </div>
+                )}
                 <div className="text-sm text-zinc-500">
-                  <span className="font-medium text-zinc-700">
-                    Tag mióta:
-                  </span>{" "}
-                  {client.startDate}
+                  <span className="font-medium text-zinc-700">Tag mióta:</span>{" "}
+                  {user.createdAt.toLocaleDateString("hu-HU")}
                 </div>
               </CardContent>
             </Card>
@@ -180,17 +212,23 @@ export default function ClientDetailPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {client.goals.map((goal) => (
-                      <Badge
-                        key={goal}
-                        variant="outline"
-                        className="bg-lime/10 text-lime-dark border-lime/20"
-                      >
-                        {goal}
-                      </Badge>
-                    ))}
-                  </div>
+                  {profile?.fitnessGoals && profile.fitnessGoals.length > 0 ? (
+                    <div className="flex flex-wrap gap-2">
+                      {profile.fitnessGoals.map((goal) => (
+                        <Badge
+                          key={goal}
+                          variant="outline"
+                          className="bg-lime/10 text-lime-dark border-lime/20"
+                        >
+                          {goal}
+                        </Badge>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-zinc-500">
+                      Nincsenek megadott célok.
+                    </p>
+                  )}
                 </CardContent>
               </Card>
 
@@ -201,10 +239,11 @@ export default function ClientDetailPage() {
                     Egészségügyi állapot
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  {client.healthConditions.length > 0 ? (
+                <CardContent className="space-y-3">
+                  {profile?.healthConditions &&
+                  profile.healthConditions.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
-                      {client.healthConditions.map((cond) => (
+                      {profile.healthConditions.map((cond) => (
                         <Badge
                           key={cond}
                           variant="outline"
@@ -219,61 +258,43 @@ export default function ClientDetailPage() {
                       Nincs ismert egészségügyi probléma.
                     </p>
                   )}
+                  {profile?.injuries && (
+                    <div className="text-sm text-zinc-500">
+                      <span className="font-medium text-zinc-700">
+                        Sérülések:
+                      </span>{" "}
+                      {profile.injuries}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
 
-              <Card className="border-zinc-200">
-                <CardHeader>
-                  <CardTitle className="text-lg">Megjegyzések</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-zinc-600">{client.notes}</p>
-                </CardContent>
-              </Card>
+              {(profile?.notes || profile?.emergencyContactName) && (
+                <Card className="border-zinc-200">
+                  <CardHeader>
+                    <CardTitle className="text-lg">Megjegyzések</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {profile?.notes && (
+                      <p className="text-sm text-zinc-600">{profile.notes}</p>
+                    )}
+                    {profile?.emergencyContactName && (
+                      <div className="text-sm text-zinc-500">
+                        <span className="font-medium text-zinc-700">
+                          Sürgősségi kapcsolat:
+                        </span>{" "}
+                        {profile.emergencyContactName}
+                        {profile.emergencyContactPhone &&
+                          ` (${profile.emergencyContactPhone})`}
+                        {profile.emergencyContactRelation &&
+                          ` - ${profile.emergencyContactRelation}`}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
             </div>
           </div>
-        </TabsContent>
-
-        {/* Training plan tab */}
-        <TabsContent value="training">
-          <Card className="border-zinc-200">
-            <CardHeader>
-              <CardTitle className="text-lg">Aktuális edzésterv</CardTitle>
-              <CardDescription>
-                Fogyás 12 hét program - 6. hét
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Nap</TableHead>
-                    <TableHead>Fókusz</TableHead>
-                    <TableHead>Gyakorlatok</TableHead>
-                    <TableHead>Sorozat/Ismétlés</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {trainingPlan.map((day) => (
-                    <TableRow key={day.day}>
-                      <TableCell className="font-medium">{day.day}</TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className="bg-lime/10 text-lime-dark border-lime/20">
-                          {day.focus}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-sm text-zinc-600">
-                        {day.exercises}
-                      </TableCell>
-                      <TableCell className="text-sm text-zinc-500">
-                        {day.sets}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
         </TabsContent>
 
         {/* Measurements tab */}
@@ -281,35 +302,47 @@ export default function ClientDetailPage() {
           <Card className="border-zinc-200">
             <CardHeader>
               <CardTitle className="text-lg">Mérési előzmények</CardTitle>
-              <CardDescription>Testsúly és testméretek alakulása</CardDescription>
+              <CardDescription>
+                Testsúly és testméretek alakulása
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Dátum</TableHead>
-                    <TableHead>Súly (kg)</TableHead>
-                    <TableHead>Mellkas (cm)</TableHead>
-                    <TableHead>Derék (cm)</TableHead>
-                    <TableHead>Csípő (cm)</TableHead>
-                    <TableHead>Kar (cm)</TableHead>
-                    <TableHead>Testzsír (%)</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {measurements.map((m) => (
-                    <TableRow key={m.date}>
-                      <TableCell className="font-medium">{m.date}</TableCell>
-                      <TableCell>{m.weight}</TableCell>
-                      <TableCell>{m.chest}</TableCell>
-                      <TableCell>{m.waist}</TableCell>
-                      <TableCell>{m.hip}</TableCell>
-                      <TableCell>{m.arm}</TableCell>
-                      <TableCell>{m.bodyFat}</TableCell>
+              {measurementsResult.length === 0 ? (
+                <p className="py-8 text-center text-sm text-zinc-400">
+                  Nincsenek rögzített mérések
+                </p>
+              ) : (
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Dátum</TableHead>
+                      <TableHead>Súly (kg)</TableHead>
+                      <TableHead>Mellkas (cm)</TableHead>
+                      <TableHead>Derék (cm)</TableHead>
+                      <TableHead>Csípő (cm)</TableHead>
+                      <TableHead>Kar (cm)</TableHead>
+                      <TableHead>Testzsír (%)</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {measurementsResult.map((m) => (
+                      <TableRow key={m.id}>
+                        <TableCell className="font-medium">{m.date}</TableCell>
+                        <TableCell>{m.weight ?? "-"}</TableCell>
+                        <TableCell>{m.chest ?? "-"}</TableCell>
+                        <TableCell>{m.waist ?? "-"}</TableCell>
+                        <TableCell>{m.hips ?? "-"}</TableCell>
+                        <TableCell>
+                          {m.leftArm != null && m.rightArm != null
+                            ? `${m.leftArm} / ${m.rightArm}`
+                            : m.leftArm ?? m.rightArm ?? "-"}
+                        </TableCell>
+                        <TableCell>{m.bodyFatPercentage ?? "-"}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
@@ -321,43 +354,57 @@ export default function ClientDetailPage() {
               <CardTitle className="text-lg">Foglalási előzmények</CardTitle>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Dátum</TableHead>
-                    <TableHead>Időpont</TableHead>
-                    <TableHead>Típus</TableHead>
-                    <TableHead className="text-right">Státusz</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {bookings.map((b, i) => (
-                    <TableRow key={i}>
-                      <TableCell className="font-medium">{b.date}</TableCell>
-                      <TableCell>{b.time}</TableCell>
-                      <TableCell className="text-zinc-500">{b.type}</TableCell>
-                      <TableCell className="text-right">
-                        <Badge
-                          variant="outline"
-                          className={
-                            b.status === "confirmed"
-                              ? "bg-lime/20 text-lime-dark border-lime/30"
-                              : b.status === "completed"
-                                ? "bg-zinc-100 text-zinc-600 border-zinc-200"
-                                : "bg-red-500/10 text-red-600 border-red-500/20"
-                          }
-                        >
-                          {b.status === "confirmed"
-                            ? "Megerősítve"
-                            : b.status === "completed"
-                              ? "Teljesítve"
-                              : "Lemondva"}
-                        </Badge>
-                      </TableCell>
+              {bookingsResult.length === 0 ? (
+                <p className="py-8 text-center text-sm text-zinc-400">
+                  Nincsenek foglalások
+                </p>
+              ) : (
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Dátum</TableHead>
+                      <TableHead>Időpont</TableHead>
+                      <TableHead>Típus</TableHead>
+                      <TableHead className="text-right">Státusz</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {bookingsResult.map((b) => (
+                      <TableRow key={b.id}>
+                        <TableCell className="font-medium">{b.date}</TableCell>
+                        <TableCell>
+                          {b.startTime?.slice(0, 5)} - {b.endTime?.slice(0, 5)}
+                        </TableCell>
+                        <TableCell className="text-zinc-500">
+                          {sessionTypeLabels[b.sessionType] || b.sessionType}
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <Badge
+                            variant="outline"
+                            className={
+                              b.status === "confirmed"
+                                ? "bg-lime/20 text-lime-dark border-lime/30"
+                                : b.status === "completed"
+                                  ? "bg-zinc-100 text-zinc-600 border-zinc-200"
+                                  : b.status === "noshow"
+                                    ? "bg-orange-500/10 text-orange-600 border-orange-500/20"
+                                    : "bg-red-500/10 text-red-600 border-red-500/20"
+                            }
+                          >
+                            {b.status === "confirmed"
+                              ? "Megerősítve"
+                              : b.status === "completed"
+                                ? "Teljesítve"
+                                : b.status === "noshow"
+                                  ? "Nem jelent meg"
+                                  : "Lemondva"}
+                          </Badge>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
             </CardContent>
           </Card>
         </TabsContent>

@@ -87,13 +87,13 @@ export function Hero() {
             variants={item}
             className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
-            <Link href="#idopontfoglalas">
+            <Link href="/dashboard/bookings">
               <Button className="h-12 rounded-full bg-lime px-8 text-base font-bold text-zinc-950 shadow-lg shadow-lime/20 transition-all hover:bg-lime-dark hover:shadow-xl hover:shadow-lime/30">
                 Ingyenes Konzultáció
                 <ArrowRight className="ml-2 size-5" />
               </Button>
             </Link>
-            <Link href="#szolgaltatasok">
+            <Link href="/services">
               <Button
                 variant="outline"
                 className="h-12 rounded-full border-zinc-700 px-8 text-base text-zinc-300 hover:border-zinc-500 hover:bg-white/5 hover:text-white"

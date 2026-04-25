@@ -39,7 +39,7 @@ export function CTASection() {
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link href="#foglalas">
+            <Link href="/dashboard/bookings">
               <Button className="h-12 rounded-full bg-zinc-950 px-8 text-base font-bold text-white shadow-xl transition-all hover:bg-zinc-800 hover:shadow-2xl">
                 <CalendarCheck className="mr-2 size-5" />
                 Foglalj Időpontot

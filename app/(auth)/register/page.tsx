@@ -28,7 +28,7 @@ export default function RegisterPage() {
       return;
     }
 
-    toast.success("Sikeres regisztracio! Jelentkezz be.");
+    toast.success("Sikeres regisztráció! Jelentkezz be.");
     router.push("/login");
   }
 
@@ -41,21 +41,21 @@ export default function RegisterPage() {
           </span>
         </Link>
         <p className="text-zinc-400 text-sm">
-          Hozd letre a fiokod es kezdj el edzeni!
+          Hozd létre a fiókodat és kezdj el edzeni!
         </p>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name" className="text-zinc-300">
-              Teljes nev
+              Teljes név
             </Label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
               <Input
                 id="name"
                 name="name"
-                placeholder="Kovacs Anna"
+                placeholder="Kovács Anna"
                 required
                 className="pl-10 bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
               />
@@ -79,7 +79,7 @@ export default function RegisterPage() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="phone" className="text-zinc-300">
-              Telefonszam
+              Telefonszám
             </Label>
             <div className="relative">
               <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
@@ -94,7 +94,7 @@ export default function RegisterPage() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="password" className="text-zinc-300">
-              Jelszo
+              Jelszó
             </Label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
@@ -109,6 +109,23 @@ export default function RegisterPage() {
               />
             </div>
           </div>
+          <div className="space-y-2">
+            <Label htmlFor="confirmPassword" className="text-zinc-300">
+              Jelszó megerősítése
+            </Label>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
+              <Input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                placeholder="Jelszó újra"
+                required
+                minLength={8}
+                className="pl-10 bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
+              />
+            </div>
+          </div>
           <Button
             type="submit"
             disabled={loading}
@@ -117,14 +134,14 @@ export default function RegisterPage() {
             {loading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
-              "Regisztracio"
+              "Regisztráció"
             )}
           </Button>
         </form>
         <p className="text-center text-sm text-zinc-500 mt-4">
-          Mar van fiokod?{" "}
+          Már van fiókod?{" "}
           <Link href="/login" className="text-lime hover:underline">
-            Bejelentkezes
+            Bejelentkezés
           </Link>
         </p>
       </CardContent>

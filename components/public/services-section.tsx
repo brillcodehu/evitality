@@ -10,28 +10,28 @@ const services = [
     title: "Személyi Edzés",
     description:
       "Egyéni edzéstervek, személyre szabott felkészítés. Minden alkalom 100%-ban rád szabva, a te céljaid szerint.",
-    href: "#szemelyi-edzes",
+    href: "/services",
   },
   {
     icon: Monitor,
     title: "Online Coaching",
     description:
       "Távolról is hatékony edzésprogram. Heti videóhívás, folyamatos üzenetben való támogatás és nyomon követés.",
-    href: "#online-coaching",
+    href: "/services",
   },
   {
     icon: Users,
     title: "Kiscsoportos Edzés",
     description:
       "Maximum 4 fős csoportban, közösségi motivációval. Az egyéni figyelem és a csapatszellem kombinációja.",
-    href: "#kiscsoportos",
+    href: "/services",
   },
   {
     icon: Apple,
     title: "Táplálkozási Tanácsadás",
     description:
       "Személyre szabott étrend, makrószámítás, bevásárlólista. Az edzés mellett a konyha is a szövetségesed lesz.",
-    href: "#taplalkozas",
+    href: "/services",
   },
 ];
 

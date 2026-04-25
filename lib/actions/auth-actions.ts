@@ -36,7 +36,7 @@ export async function registerUser(formData: FormData) {
     if (existingUser) {
       return {
         success: false,
-        error: "Ez az email cim mar regisztralt",
+        error: "Ez az email cím már regisztrált",
       };
     }
 
@@ -52,12 +52,12 @@ export async function registerUser(formData: FormData) {
 
     return {
       success: true,
-      message: "Sikeres regisztracio",
+      message: "Sikeres regisztráció",
     };
   } catch {
     return {
       success: false,
-      error: "Hiba tortent a regisztracio soran",
+      error: "Hiba történt a regisztráció során",
     };
   }
 }
@@ -86,7 +86,7 @@ export async function loginUser(formData: FormData) {
 
     return {
       success: true,
-      message: "Sikeres bejelentkezes",
+      message: "Sikeres bejelentkezés",
     };
   } catch (error) {
     if (error instanceof AuthError) {
@@ -94,12 +94,12 @@ export async function loginUser(formData: FormData) {
         case "CredentialsSignin":
           return {
             success: false,
-            error: "Hibas email cim vagy jelszo",
+            error: "Hibás email cím vagy jelszó",
           };
         default:
           return {
             success: false,
-            error: "Hiba tortent a bejelentkezes soran",
+            error: "Hiba történt a bejelentkezés során",
           };
       }
     }
