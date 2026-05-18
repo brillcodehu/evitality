@@ -17,6 +17,9 @@ export default function PublicLayout({
       <link rel="stylesheet" href="/assets/vendor/swiper/swiper-bundle.min.css" />
       <link rel="stylesheet" href="/assets/vendor/switcher/switcher.css" />
       <link rel="stylesheet" href="/assets/css/style.css" />
+      {/* skin-1 defines --gradient / --primary-shadow used by highlighted
+          section words; without it those texts render transparent */}
+      <link rel="stylesheet" href="/assets/css/skin/skin-1.css" />
 
       <div className="page-wraper">
         <Header />
