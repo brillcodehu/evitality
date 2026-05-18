@@ -1,11 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { Send } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
-const navigationLinks = [
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="2" />
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" />
+      <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+    </svg>
+  );
+}
+
+const menu = [
   { href: "/", label: "Kezdőlap" },
   { href: "/about", label: "Rólam" },
   { href: "/services", label: "Szolgáltatások" },
@@ -14,203 +31,137 @@ const navigationLinks = [
   { href: "/contact", label: "Kapcsolat" },
 ];
 
-const serviceLinks = [
-  { href: "/services", label: "Személyi edzés" },
-  { href: "/services", label: "Online coaching" },
-  { href: "/services", label: "Kiscsoportos edzés" },
-  { href: "/services", label: "Táplálkozási tanácsadás" },
-];
-
-function InstagramIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-    </svg>
-  );
-}
-
-function FacebookIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </svg>
-  );
-}
-
-function YoutubeIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
-      <path d="m10 15 5-3-5-3z" />
-    </svg>
-  );
-}
-
-const socialLinks = [
-  { href: "https://instagram.com", icon: InstagramIcon, label: "Instagram" },
-  { href: "https://facebook.com", icon: FacebookIcon, label: "Facebook" },
-  { href: "https://youtube.com", icon: YoutubeIcon, label: "YouTube" },
-];
-
 export function Footer() {
   return (
-    <footer className="bg-zinc-900 text-zinc-400">
-      {/* Newsletter Section */}
-      <div className="border-b border-zinc-800">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center gap-6 lg:flex-row lg:justify-between">
-            <div>
-              <h3 className="font-heading text-xl text-white">
-                Iratkozz fel a hírlevelemre
-              </h3>
-              <p className="mt-1 text-sm text-zinc-400">
-                Heti edzés tippek, receptek és motiváció közvetlenül a postaládádba.
-              </p>
-            </div>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="flex w-full max-w-md gap-2"
+    <footer className="bg-zinc-950 text-zinc-400">
+      {/* Newsletter */}
+      <div className="border-b border-white/10">
+        <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 lg:px-8">
+          <h3 className="font-heading text-2xl text-white sm:text-3xl">
+            Iratkozz fel a hírlevélre
+          </h3>
+          <p className="mx-auto mt-3 max-w-xl text-sm">
+            Heti egy gyakorlatias tipp edzésről, táplálkozásról és motivációról.
+            Spam nélkül, bármikor leiratkozhatsz.
+          </p>
+          <form
+            className="mx-auto mt-7 flex max-w-lg flex-col gap-3 sm:flex-row"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <input
+              type="email"
+              required
+              placeholder="E-mail címed"
+              className="flex-1 rounded-none border border-zinc-700 bg-zinc-900 px-5 py-3 text-sm text-white placeholder:text-zinc-500 focus:border-brand focus:outline-none"
+            />
+            <Button
+              type="submit"
+              className="h-auto rounded-none bg-brand px-8 py-3 font-heading text-sm uppercase tracking-wide text-white hover:bg-brand-dark"
             >
-              <Input
-                type="email"
-                placeholder="E-mail címed"
-                className="h-10 flex-1 rounded-full border-zinc-700 bg-zinc-800 px-4 text-white placeholder:text-zinc-500 focus-visible:border-lime focus-visible:ring-lime/30"
-              />
-              <Button
-                type="submit"
-                className="h-10 rounded-full bg-lime px-6 font-semibold text-zinc-950 hover:bg-lime-dark"
-              >
-                <Send className="mr-2 size-4" />
-                Feliratkozás
-              </Button>
-            </form>
-          </div>
+              Feliratkozom
+            </Button>
+          </form>
         </div>
       </div>
 
-      {/* Main Footer Grid */}
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {/* About Column */}
-          <div className="space-y-4">
-            <Link href="/" className="inline-block">
-              <span className="font-heading text-2xl text-lime">eVitality</span>
-            </Link>
-            <p className="text-sm leading-relaxed">
-              Professzionális személyi edzés és wellness platform. Segítek elérni a
-              fitness céljaidat személyre szabott edzéstervekkel és táplálkozási
-              tanácsadással.
-            </p>
-            <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex size-9 items-center justify-center rounded-full bg-zinc-800 text-zinc-400 transition-all hover:bg-lime hover:text-zinc-950"
-                  aria-label={social.label}
-                >
-                  <social.icon className="size-4" />
-                </a>
-              ))}
+      {/* Columns */}
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+          <div>
+            <div className="flex items-baseline gap-1">
+              <span className="font-heading text-2xl text-white">
+                eVitality
+              </span>
+              <span className="size-2 rounded-full bg-brand" />
             </div>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed">
+              Nagy Viktória okleveles személyi edző. Személyre szabott edzés és
+              táplálkozás Debrecenben, hogy tartós eredményt érj el.
+            </p>
+            <ul className="mt-6 flex gap-3">
+              {[
+                { icon: FacebookIcon, label: "Facebook" },
+                { icon: InstagramIcon, label: "Instagram" },
+              ].map((s) => (
+                <li key={s.label}>
+                  <a
+                    href="#"
+                    aria-label={s.label}
+                    className="flex size-10 items-center justify-center rounded-full border border-white/15 transition-colors hover:border-brand hover:bg-brand hover:text-white"
+                  >
+                    <s.icon className="size-4" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Navigation Column */}
           <div>
-            <h4 className="font-heading text-sm font-semibold uppercase tracking-wider text-white">
-              Navigáció
-            </h4>
-            <ul className="mt-4 space-y-2.5">
-              {navigationLinks.map((link) => (
-                <li key={link.href}>
+            <p className="font-heading text-sm uppercase tracking-widest text-white">
+              Menü
+            </p>
+            <ul className="mt-5 space-y-3 text-sm">
+              {menu.map((m) => (
+                <li key={m.href}>
                   <Link
-                    href={link.href}
-                    className="text-sm transition-colors hover:text-lime"
+                    href={m.href}
+                    className="transition-colors hover:text-brand"
                   >
-                    {link.label}
+                    {m.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Services Column */}
           <div>
-            <h4 className="font-heading text-sm font-semibold uppercase tracking-wider text-white">
-              Szolgáltatások
-            </h4>
-            <ul className="mt-4 space-y-2.5">
-              {serviceLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm transition-colors hover:text-lime"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Column */}
-          <div>
-            <h4 className="font-heading text-sm font-semibold uppercase tracking-wider text-white">
+            <p className="font-heading text-sm uppercase tracking-widest text-white">
               Kapcsolat
-            </h4>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              <li>
-                <a
-                  href="mailto:info@evitality.hu"
-                  className="transition-colors hover:text-lime"
-                >
-                  info@evitality.hu
-                </a>
+            </p>
+            <ul className="mt-5 space-y-4 text-sm">
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-brand" />
+                4025 Debrecen, Piac utca 1.
               </li>
               <li>
                 <a
                   href="tel:+36301234567"
-                  className="transition-colors hover:text-lime"
+                  className="flex items-center gap-3 transition-colors hover:text-brand"
                 >
+                  <Phone className="size-4 shrink-0 text-brand" />
                   +36 30 123 4567
                 </a>
               </li>
-              <li className="leading-relaxed">
-                1052 Budapest,
-                <br />
-                Váci utca 12., 3. emelet
-              </li>
-              <li className="text-zinc-500">
-                H-P: 06:00 - 21:00
-                <br />
-                Szo: 08:00 - 16:00
+              <li>
+                <a
+                  href="mailto:hello@evitality.hu"
+                  className="flex items-center gap-3 transition-colors hover:text-brand"
+                >
+                  <Mail className="size-4 shrink-0 text-brand" />
+                  hello@evitality.hu
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-zinc-800">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-between gap-4 text-xs text-zinc-500 sm:flex-row">
-            <p>&copy; {new Date().getFullYear()} eVitality. Minden jog fenntartva.</p>
-            <div className="flex gap-6">
-              <Link href="/adatvedelmi-tajekoztato" className="transition-colors hover:text-zinc-300">
-                Adatvédelmi tájékoztató
+      {/* Bottom */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 text-xs sm:flex-row sm:px-6 lg:px-8">
+          <p>© {new Date().getFullYear()} eVitality. Minden jog fenntartva.</p>
+          <ul className="flex gap-6">
+            <li>
+              <Link href="#" className="transition-colors hover:text-brand">
+                Adatvédelem
               </Link>
-              <Link href="/aszf" className="transition-colors hover:text-zinc-300">
+            </li>
+            <li>
+              <Link href="#" className="transition-colors hover:text-brand">
                 ÁSZF
               </Link>
-              <Link href="/sutik" className="transition-colors hover:text-zinc-300">
-                Sütik kezelése
-              </Link>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

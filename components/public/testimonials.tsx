@@ -1,120 +1,149 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Kovács Anna",
-    badge: "-18 kg / 5 hónap",
-    rating: 5,
-    text: "Az eVitality teljesen megváltoztatta az életem. Nem csak a kilókat adtam le, hanem egy teljesen új szemléletet kaptam az egészséges életmóddal kapcsolatban. A személyre szabott edzésterv és a folyamatos motiváció nélkülözhetetlen volt.",
-    initials: "KA",
+    before: "/img/slider-2.jpg",
+    after: "/img/slider-1.jpg",
+    avatar: "/img/slider-na-1.jpg",
+    quote:
+      "Évek óta próbálkoztam egyedül, eredmény nélkül. Viktóriával 16 hét alatt nemcsak lefogytam, hanem végre megszerettem a mozgást. Reális tervet kaptam, ami beleférhetett az életembe.",
+    name: "Kovács Anita",
+    detail: "16 hét · -12 kg",
   },
   {
-    name: "Szabó Péter",
-    badge: "+12 kg izom / 8 hónap",
-    rating: 5,
-    text: "Évekig jártam edzőterembe eredmény nélkül. Az eVitality-vel végre megértettem, mit csinálok rosszul. A táplálkozási tanácsadás és a precíz edzésterv meghozta az áttörést, amire vártam.",
-    initials: "SP",
+    before: "/img/slider-2.jpg",
+    after: "/img/slider-3.jpg",
+    avatar: "/img/slider-na-2.png",
+    quote:
+      "A személyre szabott edzés és a folyamatos visszajelzés mindent megváltoztatott. Erősebb vagyok, mint valaha, és először érzem azt, hogy ez tartós lesz.",
+    name: "Tóth Gábor",
+    detail: "24 hét · +8 kg izom",
   },
   {
-    name: "Tóth Réka",
-    badge: "-25 kg / 10 hónap",
-    rating: 5,
-    text: "Szülés után azt hittem, sosem nyerem vissza régi formám. Az online coaching rugalmassága tökéletesen illett az élethelyzetemhez. Ma jobban érzem magam, mint valaha, és sokkal több energiám van a gyerekekkel.",
-    initials: "TR",
+    before: "/img/slider-2.jpg",
+    after: "/img/slider-1.jpg",
+    avatar: "/img/slider-na-1.png",
+    quote:
+      "Szülés után teljesen elvesztettem a formám és az önbizalmam. Viktória türelmesen, lépésről lépésre vezetett vissza. Ma újra jól érzem magam a bőrömben.",
+    name: "Nagy Eszter",
+    detail: "20 hét · alakformálás",
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-  },
-};
-
-const cardVariant = {
-  hidden: { opacity: 0, x: -30 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
-};
-
 export function Testimonials() {
+  const [index, setIndex] = useState(0);
+  const t = testimonials[index];
+
+  const go = (dir: number) =>
+    setIndex(
+      (prev) => (prev + dir + testimonials.length) % testimonials.length
+    );
+
   return (
-    <section className="relative bg-zinc-900 py-24 lg:py-32 overflow-hidden">
-      {/* Background decoration */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -bottom-40 -right-40 size-[500px] rounded-full bg-lime/5 blur-[100px]" />
-      </div>
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <span className="text-sm font-semibold uppercase tracking-widest text-lime">
-            Visszajelzések
+    <section className="bg-zinc-50 py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="text-sm font-bold uppercase tracking-widest text-brand">
+            Eredmények
           </span>
-          <h2 className="mt-3 font-heading text-3xl text-white sm:text-4xl lg:text-5xl">
-            Amit Az Ügyfeleim Mondanak
+          <h2 className="mt-4 font-heading text-3xl leading-tight text-black sm:text-4xl lg:text-5xl">
+            Valódi emberek. Valódi eredmények.
           </h2>
-          <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-lime" />
-        </motion.div>
+          <p className="mt-4 text-base text-zinc-600">
+            Nem retusált csodák, hanem következetes munka és személyes
+            támogatás eredménye.
+          </p>
+        </div>
 
-        {/* Testimonial Cards */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-80px" }}
-          className="mt-16 grid gap-6 md:grid-cols-3"
-        >
-          {testimonials.map((testimonial) => (
+        <div className="relative mt-14">
+          <AnimatePresence mode="wait">
             <motion.div
-              key={testimonial.name}
-              variants={cardVariant}
-              className="group relative flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700"
+              key={index}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.4 }}
+              className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2"
             >
-              {/* Quote icon */}
-              <Quote className="mb-4 size-8 text-lime/20" />
-
-              {/* Text */}
-              <p className="flex-1 text-sm leading-relaxed text-zinc-400">
-                &ldquo;{testimonial.text}&rdquo;
-              </p>
-
-              {/* Rating */}
-              <div className="mt-6 flex gap-0.5">
-                {Array.from({ length: testimonial.rating }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="size-4 fill-lime text-lime"
-                  />
+              {/* Before / after */}
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { src: t.before, label: "Előtte" },
+                  { src: t.after, label: "Utána" },
+                ].map((img) => (
+                  <div
+                    key={img.label}
+                    className="relative overflow-hidden rounded-2xl shadow-lg"
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.label}
+                      className="h-80 w-full object-cover"
+                    />
+                    <span className="absolute bottom-3 left-3 rounded-full bg-black/70 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white backdrop-blur">
+                      {img.label}
+                    </span>
+                  </div>
                 ))}
               </div>
 
-              {/* Author */}
-              <div className="mt-4 flex items-center gap-3 border-t border-zinc-800 pt-4">
-                <div className="flex size-10 items-center justify-center rounded-full bg-lime/15 font-heading text-sm text-lime">
-                  {testimonial.initials}
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-white">
-                    {testimonial.name}
-                  </div>
-                  <div className="mt-0.5 inline-flex rounded-full bg-lime/10 px-2.5 py-0.5 text-xs font-medium text-lime">
-                    {testimonial.badge}
+              {/* Quote */}
+              <div>
+                <Quote className="size-10 text-brand" />
+                <p className="mt-5 text-lg leading-relaxed text-zinc-700 sm:text-xl">
+                  {t.quote}
+                </p>
+                <div className="mt-7 flex items-center gap-4">
+                  <img
+                    src={t.avatar}
+                    alt={t.name}
+                    className="size-14 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="font-heading text-lg text-black">{t.name}</p>
+                    <p className="text-sm font-medium text-brand">{t.detail}</p>
                   </div>
                 </div>
               </div>
             </motion.div>
-          ))}
-        </motion.div>
+          </AnimatePresence>
+
+          <div className="mt-10 flex items-center justify-center gap-4">
+            <button
+              type="button"
+              onClick={() => go(-1)}
+              aria-label="Előző"
+              className="flex size-12 items-center justify-center rounded-full border border-zinc-300 text-black transition-colors hover:border-brand hover:bg-brand hover:text-white"
+            >
+              <ChevronLeft className="size-5" />
+            </button>
+            <div className="flex gap-2">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setIndex(i)}
+                  aria-label={`${i + 1}. vélemény`}
+                  className={`h-2 rounded-full transition-all ${
+                    i === index ? "w-8 bg-brand" : "w-2 bg-zinc-300"
+                  }`}
+                />
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => go(1)}
+              aria-label="Következő"
+              className="flex size-12 items-center justify-center rounded-full border border-zinc-300 text-black transition-colors hover:border-brand hover:bg-brand hover:text-white"
+            >
+              <ChevronRight className="size-5" />
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
