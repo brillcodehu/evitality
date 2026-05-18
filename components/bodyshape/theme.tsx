@@ -29,7 +29,7 @@ export const IMAGES = {
   aboutman: img("about/man.png"),
   boxpic1: img("about/image-box/pic1.jpg"),
   boxpic2: img("about/image-box/pic2.jpg"),
-  sliderpic1: img("main-slider/slider1/pic1.png"),
+  sliderpic1: img("evitality/eva-hero.png"),
   footerbg: img("background/footer-bg.png"),
   footergril1: img("footer-girl1.png"),
 
