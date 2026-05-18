@@ -25,13 +25,13 @@ export const IMAGES = {
   aboutlogo3: img("about/logo3.png"),
   aboutlogo4: img("about/logo4.png"),
 
-  aboutgirl: img("about/girl.png"),
+  aboutgirl: img("evitality/eva-hero.png"),
   aboutman: img("about/man.png"),
-  boxpic1: img("about/image-box/pic1.jpg"),
-  boxpic2: img("about/image-box/pic2.jpg"),
-  sliderpic1: img("evitality/eva-hero.png"),
+  boxpic1: img("evitality/about-1.jpg"),
+  boxpic2: img("evitality/about-2.jpg"),
+  sliderpic1: img("evitality/eva-hero8.png"),
   footerbg: img("background/footer-bg.png"),
-  footergril1: img("footer-girl1.png"),
+  footergril1: img("evitality/eva-hero.png"),
 
   footercircle: img("pattern/circle-footer-1.svg"),
   circlesvg1: img("pattern/pattern1.svg"),

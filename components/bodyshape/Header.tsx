@@ -45,7 +45,7 @@ const Header = () => {
                   <i className="fa-regular fa-clock"></i> H–P 06:00 – 20:00
                 </li>{" "}
                 <li>
-                  <i className="fa fa-phone"></i> +36 30 123 4567
+                  <i className="fa fa-phone"></i> +36 30 365 1000
                 </li>
               </ul>
             </div>

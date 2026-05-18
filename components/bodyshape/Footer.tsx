@@ -16,7 +16,7 @@ const Footer = () => {
         <div className="footer-top">
           <div className="container">
             <div className="row">
-              <div className="col-xl-3 col-md-12">
+              <div className="col-xl-4 col-md-12">
                 <div className="widget widget_about">
                   <div className="footer-logo logo-dark">
                     <Link to={"/"}>
@@ -24,8 +24,8 @@ const Footer = () => {
                     </Link>
                   </div>
                   <p>
-                    Nagy Viktória okleveles személyi edző. Személyre szabott
-                    edzés és táplálkozás Debrecenben, tartós eredményért.
+                    Fogarasi Éva személyi edző. Személyre szabott edzés és
+                    táplálkozás Debrecenben, tartós eredményért.
                   </p>
                   <h6 className="m-b15">Kövess minket</h6>
                   <div className="dz-social-icon style-1">
@@ -62,47 +62,25 @@ const Footer = () => {
                 </div>
               </div>
               <div
-                className="col-xl-3 col-md-4 wow fadeInUp"
-                data-wow-delay="0.4s"
-              >
-                <div className="widget recent-posts-entry">
-                  <h4 className="footer-title">Blogbejegyzések</h4>
-                  <div className="widget-post-bx">
-                    <div className="widget-post clearfix">
-                      <div className="dz-info">
-                        <h6 className="title">
-                          <Link to={"/blog"}>A fitnesz filozófiája</Link>
-                        </h6>
-                        <span className="post-date"> 2026. JÚNIUS 18.</span>
-                      </div>
-                    </div>
-                    <div className="post-separator"></div>
-                    <div className="widget-post clearfix">
-                      <div className="dz-info">
-                        <h6 className="title">
-                          <Link to={"/blog"}>50 legjobb tipp a fitneszhez</Link>
-                        </h6>
-                        <span className="post-date"> 2026. AUGUSZTUS 22.</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="col-xl-3 col-md-4 wow fadeInUp"
+                className="col-xl-4 col-md-6 wow fadeInUp"
                 data-wow-delay="0.6s"
               >
                 <div className="widget widget_locations">
-                  <h4 className="footer-title">Helyszín</h4>
+                  <h4 className="footer-title">Elérhetőség</h4>
                   <div className="clearfix">
                     <h6>Debrecen</h6>
                     <p>4025 Debrecen, Piac utca 1.</p>
+                    <p>
+                      <a href="tel:+36303651000" style={{ color: "inherit" }}>
+                        +36 30 365 1000
+                      </a>
+                    </p>
                     {SVGICON.map}
                   </div>
                 </div>
               </div>
               <div
-                className="col-xl-3 col-md-4 wow fadeInUp"
+                className="col-xl-4 col-md-6 wow fadeInUp"
                 data-wow-delay="0.8s"
               >
                 <div className="widget widget_working">

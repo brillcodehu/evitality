@@ -1,10 +1,9 @@
 "use client";
 import React from "react";
-import { Link } from "./Link";
 import { Tab, Nav } from "react-bootstrap";
 import { IMAGES } from "./theme";
 
-const FitnessGoal = ({ isOpenModal }: { isOpenModal: (v: boolean) => void }) => {
+const FitnessGoal = () => {
   return (
     <>
       <div className="col-lg-6 about-content m-b30">
@@ -63,38 +62,35 @@ const FitnessGoal = ({ isOpenModal }: { isOpenModal: (v: boolean) => void }) => 
           </span>
           <div className="content">
             <span>Hívj bizalommal</span>
-            <h4 className="number">+36 30 123 4567</h4>
+            <h4 className="number">+36 30 365 1000</h4>
           </div>
         </div>
       </div>
       <div className="col-lg-6 m-b30">
         <div className="dz-media">
-          <div className="image-box">
-            <div className="video-bx1 h-auto w-auto overflow-visible">
-              <img src={IMAGES.boxpic1} alt="" />
-              <div className="video-btn sm">
-                <Link
-                  to={"#"}
-                  className="popup-youtube"
-                  onClick={() => isOpenModal(true)}
-                >
-                  <i className="fa fa-play" />
-                </Link>
-              </div>
-            </div>
-            <div className="info-box">
-              <span>
-                <i className="flaticon-play text-primary"></i> Minőségi videó
-              </span>
-            </div>
+          <div className="image-box" style={{ marginBottom: 20 }}>
+            <img
+              src={IMAGES.boxpic1}
+              alt=""
+              style={{
+                width: "100%",
+                height: 280,
+                objectFit: "cover",
+                borderRadius: 8,
+              }}
+            />
           </div>
           <div className="image-box">
-            <img src={IMAGES.boxpic2} alt="" />
-            <div className="info-box">
-              <span>
-                <i className="flaticon-athletics text-primary"></i> Profi edző
-              </span>
-            </div>
+            <img
+              src={IMAGES.boxpic2}
+              alt=""
+              style={{
+                width: "100%",
+                height: 280,
+                objectFit: "cover",
+                borderRadius: 8,
+              }}
+            />
           </div>
         </div>
       </div>

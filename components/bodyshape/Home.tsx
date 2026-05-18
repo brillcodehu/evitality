@@ -1,25 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
 import ClientSlider from "./ClientSlider";
 import FitnessIdeas from "./FitnessIdeas";
-import CounterBlog from "./CounterBlog";
+import QuoteBlock from "./QuoteBlock";
 import FitnessGoal from "./FitnessGoal";
 import MainBanner from "./MainBanner";
 import PerfectTrainers from "./PerfectTrainers";
 import { IMAGES, SVGICON } from "./theme";
-import NewsLetter from "./NewsLetter";
-import WorkoutSlider from "./WorkoutSlider";
-import LatestSlider from "./LatestSlider";
+import LeadForm from "./LeadForm";
 import { Link } from "./Link";
 
 const Home = () => {
-  const [isOpen, setOpen] = useState(false);
   return (
     <>
       <div className="page-content bg-white">
         <div className="main-bnr-one">
-          <MainBanner isOpenModal={setOpen} />
+          <MainBanner />
         </div>
         <section className="content-inner about-wrapper1 about-bx1">
           <div className="container">
@@ -32,7 +29,7 @@ const Home = () => {
           <div className="container">
             <div className="counter-inner bg-dark">
               <div className="row">
-                <CounterBlog />
+                <QuoteBlock />
               </div>
               <svg
                 className="triangle1"
@@ -105,7 +102,7 @@ const Home = () => {
         >
           <div className="container">
             <div className="row about-bx2 align-items-center">
-              <FitnessGoal isOpenModal={setOpen} />
+              <FitnessGoal />
             </div>
           </div>
         </section>
@@ -137,32 +134,15 @@ const Home = () => {
             <FitnessIdeas />
           </div>
         </section>
-        <section className="content-inner portfolio-wrapper">
-          <div className="portfolio-wrapper-inner">
-            <div className="container-fluid  p-0">
-              <WorkoutSlider />
-            </div>
-          </div>
-          <svg
-            className="shape-up"
-            width="635"
-            height="107"
-            viewBox="0 0 635 107"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M577 0L-16 107L635 45L577 0Z" fill="var(--primary-dark)" />
-          </svg>
-          <svg
-            className="shape-down"
-            width="673"
-            height="109"
-            viewBox="0 0 673 109"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M682 0L0 56L682 109V0Z" fill="var(--primary)" />
-          </svg>
+        <section
+          className="content-inner"
+          style={{
+            backgroundImage: "url(" + IMAGES.BgImage3 + ")",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+          }}
+        >
+          <LeadForm />
         </section>
         <section
           className="content-inner-1 testimonial-wrapper1"
@@ -212,45 +192,7 @@ const Home = () => {
             alt=""
           />
         </section>
-        <section
-          className="content-inner-1 overflow-hidden"
-          style={{ backgroundImage: "url(" + IMAGES.BgImage1 + ")" }}
-        >
-          <LatestSlider />
-        </section>
-        <section className="call-action style-1 footer-action">
-          <div className="container">
-            <NewsLetter />
-          </div>
-        </section>
       </div>
-
-      {isOpen && (
-        <div
-          className="modal-video"
-          onClick={() => setOpen(false)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 1000,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "rgba(0,0,0,0.85)",
-            padding: "1rem",
-          }}
-        >
-          <div style={{ width: "100%", maxWidth: 960, aspectRatio: "16/9" }}>
-            <iframe
-              style={{ width: "100%", height: "100%", borderRadius: 8 }}
-              src="https://www.youtube.com/embed/soMRdetQ_kA?autoplay=1"
-              title="Bemutatkozó videó"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-            />
-          </div>
-        </div>
-      )}
     </>
   );
 };

@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { Link } from "./Link";
 import { IMAGES, SVGICON } from "./theme";
 
 const iconBox = [
@@ -42,9 +41,9 @@ const PerfectTrainers = () => {
             Tökéletes <span>edző</span>
           </h2>
           <p className="wow fadeInUp" data-wow-delay="0.6s">
-            Több mint nyolc éve segítek embereknek formába lendülni Debrecenben.
-            Személyre szabott edzés- és táplálkozási tervet kapsz, valódi
-            támogatással, hogy az eredmény tartós legyen.
+            Friss lendülettel és teljes odafigyeléssel dolgozom veled
+            Debrecenben. Személyre szabott edzés- és táplálkozási tervet kapsz,
+            valódi támogatással, hogy az eredmény tartós legyen.
           </p>
         </div>
         <div className="row m-t40 m-sm-b20 m-b30">
@@ -62,14 +61,6 @@ const PerfectTrainers = () => {
               </div>
             </div>
           ))}
-        </div>
-        <div className="clearfix wow fadeInUp" data-wow-delay="1.0s">
-          <Link
-            to={"/about"}
-            className="btn btn-skew btn-lg btn-primary shadow-primary"
-          >
-            <span>Rólam bővebben</span>
-          </Link>
         </div>
       </div>
     </>
