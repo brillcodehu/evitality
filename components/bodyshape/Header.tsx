@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Link } from "./Link";
-import { IMAGES } from "./theme";
 import Collapse from "react-bootstrap/Collapse";
+import Logo from "./Logo";
 
 type MenuItem = {
   title: string;
@@ -79,7 +79,7 @@ export const Mainheader = ({ MenuList }: { MenuList: MenuItem[] }) => {
         <div className="box-header clearfix">
           <div className="logo-header mostion logo-dark">
             <Link to={"/"}>
-              <img className="select_logo" src={IMAGES.logo} alt="" />
+              <Logo variant="dark" />
             </Link>
           </div>
 
@@ -136,7 +136,7 @@ export const Mainheader = ({ MenuList }: { MenuList: MenuItem[] }) => {
           >
             <div className="logo-header logo-dark">
               <Link to={"/"}>
-                <img src={IMAGES.logo} alt="" />
+                <Logo variant="dark" />
               </Link>
             </div>
             <ul className="nav navbar-nav navbar navbar-left">

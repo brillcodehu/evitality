@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "./Link";
 import { IMAGES, SVGICON } from "./theme";
+import Logo from "./Logo";
 
 const Footer = () => {
   const update = new Date();
@@ -19,11 +20,7 @@ const Footer = () => {
                 <div className="widget widget_about">
                   <div className="footer-logo logo-dark">
                     <Link to={"/"}>
-                      <img
-                        className="select_logo_dark"
-                        src={IMAGES.logo}
-                        alt=""
-                      />
+                      <Logo variant="light" />
                     </Link>
                   </div>
                   <p>
