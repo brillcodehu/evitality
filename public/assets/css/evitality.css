@@ -1,0 +1,248 @@
+/* eVitality custom overrides — loaded last, after style.css + skin-1.css */
+
+/* ---- Hero background FITNESS watermark: reddish + tasteful, visible ---- */
+.main-bnr-one .banner-inner .data-text {
+  color: rgba(255, 45, 45, 0.14) !important;
+  opacity: 1 !important;
+  -webkit-text-stroke: 1px rgba(255, 45, 45, 0.38);
+  filter: drop-shadow(0 16px 34px rgba(255, 45, 45, 0.22)) !important;
+}
+
+/* ---- Hero readability + mobile: image must not cover the text ---- */
+.main-bnr-one .banner-content .title {
+  text-shadow: 0 2px 18px rgba(255, 255, 255, 0.55);
+}
+
+@media only screen and (max-width: 991px) {
+  .main-bnr-one .banner-inner {
+    min-height: auto !important;
+    padding-top: 120px !important;
+    padding-bottom: 40px !important;
+  }
+  .main-bnr-one .banner-row {
+    flex-direction: column !important;
+  }
+  .main-bnr-one .banner-media,
+  .main-bnr-one .media1 {
+    position: relative !important;
+    max-width: 78% !important;
+    margin: 28px auto 0 !important;
+    left: auto !important;
+    top: auto !important;
+  }
+  .main-bnr-one .banner-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(4px);
+    border-radius: 14px;
+    padding: 26px 20px;
+  }
+  .main-bnr-one .banner-content .d-flex {
+    justify-content: center;
+  }
+  .main-bnr-one .banner-inner .data-text {
+    font-size: 110px !important;
+    bottom: auto !important;
+    top: 78px !important;
+  }
+}
+
+/* ---- General mobile text legibility on image-backed sections ---- */
+@media only screen and (max-width: 767px) {
+  .content-inner,
+  .content-inner-1 {
+    background-color: #ffffff;
+  }
+  .about-wrapper2 {
+    position: relative;
+  }
+  .about-wrapper2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.82);
+    z-index: 0;
+  }
+  .about-wrapper2 .container {
+    position: relative;
+    z-index: 1;
+  }
+  .section-head .sub-title {
+    color: var(--primary) !important;
+  }
+  .section-head .title,
+  .section-head p,
+  .about-content p,
+  .icon-content .dz-title {
+    color: #1c1c1c !important;
+  }
+}
+
+/* ---- Lead form: clean, refined card ---- */
+.ev-lead {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+  padding: 40px;
+  border: 1px solid #ececec;
+}
+@media only screen and (max-width: 575px) {
+  .ev-lead {
+    padding: 24px;
+  }
+}
+.ev-lead .ev-field {
+  margin-bottom: 16px;
+}
+.ev-lead label {
+  display: block;
+  font-family: Oswald, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 7px;
+}
+.ev-lead input,
+.ev-lead select {
+  width: 100%;
+  height: 54px;
+  padding: 0 18px;
+  font-size: 16px;
+  color: #1c1c1c;
+  background: #f6f6f7;
+  border: 2px solid #ececec;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.ev-lead select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 44px;
+}
+.ev-lead input:focus,
+.ev-lead select:focus {
+  border-color: var(--primary);
+  background: #fff;
+}
+.ev-lead input::placeholder {
+  color: #9a9a9a;
+}
+.ev-lead .ev-submit {
+  width: 100%;
+  height: 58px;
+  margin-top: 8px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--primary);
+  color: #fff;
+  font-family: Oswald, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.ev-lead .ev-submit:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+.ev-lead .ev-ok {
+  margin: 16px 0 0;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ---- BMI calculator ---- */
+.ev-bmi {
+  background: #15110f;
+  border-radius: 20px;
+  padding: 48px 40px;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+@media only screen and (max-width: 575px) {
+  .ev-bmi {
+    padding: 32px 22px;
+  }
+}
+.ev-bmi h2 {
+  color: #fff;
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.ev-bmi h2 span {
+  color: var(--primary);
+}
+.ev-bmi .ev-bmi-sub {
+  color: #b9b3af;
+  margin-bottom: 28px;
+}
+.ev-bmi-grid {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.ev-bmi-grid input {
+  flex: 1 1 150px;
+  height: 56px;
+  padding: 0 18px;
+  font-size: 16px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  outline: none;
+}
+.ev-bmi-grid input::placeholder {
+  color: #8d8884;
+}
+.ev-bmi-grid input:focus {
+  border-color: var(--primary);
+}
+.ev-bmi button {
+  margin-top: 22px;
+  height: 56px;
+  padding: 0 40px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--primary);
+  color: #fff;
+  font-family: Oswald, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.ev-bmi button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+.ev-bmi-result {
+  margin-top: 28px;
+  font-size: 18px;
+}
+.ev-bmi-result strong {
+  display: block;
+  font-family: Oswald, sans-serif;
+  font-size: 52px;
+  line-height: 1;
+  color: var(--primary);
+  margin-bottom: 6px;
+}

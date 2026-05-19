@@ -35,50 +35,49 @@ const LeadForm = () => {
             </p>
           </div>
 
-          <form onSubmit={onSubmit} className="dezPidol-form">
+          <form className="ev-lead" onSubmit={onSubmit}>
             <div className="row">
-              <div className="col-md-6 mb-3">
-                <div className="input-skew">
+              <div className="col-md-6">
+                <div className="ev-field">
+                  <label htmlFor="lf-name">Neved</label>
                   <input
+                    id="lf-name"
                     name="name"
                     required
                     type="text"
-                    className="form-control"
-                    placeholder="Neved"
+                    placeholder="Pl. Kovács Anna"
                   />
                 </div>
               </div>
-              <div className="col-md-6 mb-3">
-                <div className="input-skew">
+              <div className="col-md-6">
+                <div className="ev-field">
+                  <label htmlFor="lf-phone">Telefonszámod</label>
                   <input
+                    id="lf-phone"
                     name="phone"
                     required
                     type="tel"
-                    className="form-control"
-                    placeholder="Telefonszámod"
+                    placeholder="+36 ..."
                   />
                 </div>
               </div>
-              <div className="col-md-6 mb-3">
-                <div className="input-skew">
+              <div className="col-md-6">
+                <div className="ev-field">
+                  <label htmlFor="lf-email">E-mail (opcionális)</label>
                   <input
+                    id="lf-email"
                     name="email"
                     type="email"
-                    className="form-control"
-                    placeholder="E-mail (opcionális)"
+                    placeholder="email@pelda.hu"
                   />
                 </div>
               </div>
-              <div className="col-md-6 mb-3">
-                <div className="input-skew">
-                  <select
-                    name="goal"
-                    required
-                    className="form-control"
-                    defaultValue=""
-                  >
+              <div className="col-md-6">
+                <div className="ev-field">
+                  <label htmlFor="lf-goal">Mi a célod?</label>
+                  <select id="lf-goal" name="goal" required defaultValue="">
                     <option value="" disabled>
-                      Mi a célod?
+                      Válassz célt…
                     </option>
                     {goals.map((g) => (
                       <option key={g} value={g}>
@@ -88,15 +87,12 @@ const LeadForm = () => {
                   </select>
                 </div>
               </div>
-              <div className="col-12 text-center mt-2">
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-lg btn-skew"
-                >
-                  <span>Kérem a konzultációt</span>
+              <div className="col-12">
+                <button type="submit" className="ev-submit">
+                  Kérem a konzultációt
                 </button>
                 {sent && (
-                  <p className="m-t20 m-b0 text-primary">
+                  <p className="ev-ok text-center">
                     Köszönöm! Hamarosan kereslek a megadott elérhetőségen.
                   </p>
                 )}

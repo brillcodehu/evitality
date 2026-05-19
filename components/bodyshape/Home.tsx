@@ -9,6 +9,7 @@ import MainBanner from "./MainBanner";
 import PerfectTrainers from "./PerfectTrainers";
 import { IMAGES, SVGICON } from "./theme";
 import LeadForm from "./LeadForm";
+import Bmi from "./Bmi";
 import { Link } from "./Link";
 
 const Home = () => {
@@ -133,6 +134,9 @@ const Home = () => {
             </div>
             <FitnessIdeas />
           </div>
+        </section>
+        <section className="content-inner bg-white">
+          <Bmi />
         </section>
         <section
           className="content-inner"

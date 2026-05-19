@@ -20,6 +20,8 @@ export default function PublicLayout({
       {/* skin-1 defines --gradient / --primary-shadow used by highlighted
           section words; without it those texts render transparent */}
       <link rel="stylesheet" href="/assets/css/skin/skin-1.css" />
+      {/* eVitality custom overrides — must load last */}
+      <link rel="stylesheet" href="/assets/css/evitality.css" />
 
       <div className="page-wraper">
         <Header />

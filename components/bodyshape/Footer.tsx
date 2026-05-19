@@ -16,7 +16,7 @@ const Footer = () => {
         <div className="footer-top">
           <div className="container">
             <div className="row">
-              <div className="col-xl-4 col-md-12">
+              <div className="col-xl-6 col-md-12">
                 <div className="widget widget_about">
                   <div className="footer-logo logo-dark">
                     <Link to={"/"}>
@@ -62,14 +62,14 @@ const Footer = () => {
                 </div>
               </div>
               <div
-                className="col-xl-4 col-md-6 wow fadeInUp"
+                className="col-xl-6 col-md-6 wow fadeInUp"
                 data-wow-delay="0.6s"
               >
                 <div className="widget widget_locations">
                   <h4 className="footer-title">Elérhetőség</h4>
                   <div className="clearfix">
                     <h6>Debrecen</h6>
-                    <p>4025 Debrecen, Piac utca 1.</p>
+                    <p>Debrecen, Segner tér 1</p>
                     <p>
                       <a href="tel:+36303651000" style={{ color: "inherit" }}>
                         +36 30 365 1000
@@ -77,34 +77,6 @@ const Footer = () => {
                     </p>
                     {SVGICON.map}
                   </div>
-                </div>
-              </div>
-              <div
-                className="col-xl-4 col-md-6 wow fadeInUp"
-                data-wow-delay="0.8s"
-              >
-                <div className="widget widget_working">
-                  <h4 className="footer-title">Nyitvatartás</h4>
-                  <ul>
-                    <li>
-                      <span className="days">Hétfő – Péntek:</span>
-                      <span className="time">
-                        <Link to={"/contact"}>07:00 – 21:00</Link>
-                      </span>
-                    </li>
-                    <li>
-                      <span className="days">Szombat:</span>
-                      <span className="time">
-                        <Link to={"/contact"}>07:00 – 16:00</Link>
-                      </span>
-                    </li>
-                    <li>
-                      <span className="days">Vasárnap zárva</span>
-                    </li>
-                  </ul>
-                  <Link to={"/contact"} className="btn-link">
-                    Bővebben <i className="fa-solid fa-arrow-right m-l10"></i>
-                  </Link>
                 </div>
               </div>
             </div>
