@@ -16,37 +16,34 @@
 @media only screen and (max-width: 991px) {
   .main-bnr-one .banner-inner {
     min-height: auto !important;
-    padding-top: 150px !important;
-    padding-bottom: 16px !important;
+    padding-top: 96px !important;
+    padding-bottom: 36px !important;
   }
+  /* image on TOP, text BELOW */
   .main-bnr-one .banner-row {
-    flex-direction: column !important;
-  }
-  .main-bnr-one .banner-content {
-    position: relative;
-    z-index: 3;
+    flex-direction: column-reverse !important;
   }
   .main-bnr-one .banner-media,
   .main-bnr-one .media1 {
     position: relative !important;
-    max-width: 88% !important;
-    margin: 14px auto 0 !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
     left: auto !important;
     right: auto !important;
     top: auto !important;
   }
+  .main-bnr-one .banner-content {
+    position: relative;
+    z-index: 3;
+    margin-top: -8px;
+    text-align: center;
+  }
+  .main-bnr-one .banner-content .d-flex {
+    justify-content: center;
+  }
   /* the giant background word breaks the phone layout — hide on mobile */
   .main-bnr-one .banner-inner .data-text {
     display: none !important;
-  }
-}
-@media only screen and (max-width: 575px) {
-  .main-bnr-one .banner-inner {
-    padding-top: 140px !important;
-  }
-  .main-bnr-one .banner-media,
-  .main-bnr-one .media1 {
-    max-width: 100% !important;
   }
 }
 
