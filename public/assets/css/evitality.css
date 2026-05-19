@@ -1,60 +1,74 @@
 /* eVitality custom overrides — loaded last, after style.css + skin-1.css */
 
-/* ---- Hero background FITNESS watermark: reddish + tasteful, visible ---- */
+/* ---- Hero FITNESS watermark: STATIC (no pulse/float), subtle red ---- */
+.main-bnr-one .banner-inner .data-text,
+.main-bnr-one .banner-inner .data-text span {
+  animation: none !important;
+}
 .main-bnr-one .banner-inner .data-text {
-  color: rgba(255, 45, 45, 0.14) !important;
+  color: rgba(255, 45, 45, 0.10) !important;
   opacity: 1 !important;
-  -webkit-text-stroke: 1px rgba(255, 45, 45, 0.38);
-  filter: drop-shadow(0 16px 34px rgba(255, 45, 45, 0.22)) !important;
+  -webkit-text-stroke: 1px rgba(255, 45, 45, 0.28);
+  filter: none !important;
 }
 
-/* ---- Hero readability + mobile: image must not cover the text ---- */
-.main-bnr-one .banner-content .title {
-  text-shadow: 0 2px 18px rgba(255, 255, 255, 0.55);
-}
-
+/* ---- Mobile hero: clean stacked layout, image below text ---- */
 @media only screen and (max-width: 991px) {
   .main-bnr-one .banner-inner {
     min-height: auto !important;
-    padding-top: 120px !important;
-    padding-bottom: 40px !important;
+    padding-top: 110px !important;
+    padding-bottom: 36px !important;
   }
   .main-bnr-one .banner-row {
     flex-direction: column !important;
   }
-  .main-bnr-one .banner-media,
-  .main-bnr-one .media1 {
-    position: relative !important;
-    max-width: 78% !important;
-    margin: 28px auto 0 !important;
-    left: auto !important;
-    top: auto !important;
-  }
   .main-bnr-one .banner-content {
     position: relative;
     z-index: 3;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.78);
-    backdrop-filter: blur(4px);
-    border-radius: 14px;
-    padding: 26px 20px;
   }
-  .main-bnr-one .banner-content .d-flex {
-    justify-content: center;
+  .main-bnr-one .banner-media,
+  .main-bnr-one .media1 {
+    position: relative !important;
+    max-width: 72% !important;
+    margin: 22px auto 0 !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
   }
+  /* the big background word causes overlap on phones — hide it there */
   .main-bnr-one .banner-inner .data-text {
-    font-size: 110px !important;
-    bottom: auto !important;
-    top: 78px !important;
+    display: none !important;
   }
 }
 
-/* ---- General mobile text legibility on image-backed sections ---- */
-@media only screen and (max-width: 767px) {
-  .content-inner,
-  .content-inner-1 {
-    background-color: #ffffff;
+/* ---- "Tökéletes edző" section: kill decorative red lines on mobile so
+        the heading + paragraph are readable ---- */
+@media only screen and (max-width: 991px) {
+  .about-bx1 .dz-media svg {
+    display: none !important;
   }
+  .about-bx1 .dz-media ul {
+    display: none !important;
+  }
+  .about-bx1 .dz-media {
+    max-width: 320px !important;
+    margin: 0 auto 24px !important;
+  }
+  .about-bx1 .dz-media img {
+    width: 100% !important;
+  }
+  .about-bx1 .about-content {
+    position: relative;
+    z-index: 2;
+  }
+  .about-bx1 .section-head .title,
+  .about-bx1 .about-content p {
+    color: #1c1c1c !important;
+  }
+}
+
+/* ---- Mobile contrast on image-backed section (Rólam) ---- */
+@media only screen and (max-width: 767px) {
   .about-wrapper2 {
     position: relative;
   }
@@ -62,21 +76,12 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.85);
     z-index: 0;
   }
   .about-wrapper2 .container {
     position: relative;
     z-index: 1;
-  }
-  .section-head .sub-title {
-    color: var(--primary) !important;
-  }
-  .section-head .title,
-  .section-head p,
-  .about-content p,
-  .icon-content .dz-title {
-    color: #1c1c1c !important;
   }
 }
 
