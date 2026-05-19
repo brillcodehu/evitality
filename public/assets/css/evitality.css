@@ -259,3 +259,198 @@
   color: var(--primary);
   margin-bottom: 6px;
 }
+
+/* ===== Minimal header: transparent -> sticky bar with logo + CTA ===== */
+.ev-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding: 22px 0;
+  transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+}
+.ev-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ev-header .ev-logo {
+  display: inline-flex;
+  align-items: center;
+}
+.ev-header.is-stuck {
+  background: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  padding: 10px 0;
+}
+.ev-cta {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff !important;
+  font-family: Oswald, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 13px 26px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s, background 0.2s;
+}
+.ev-header.is-stuck .ev-cta {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.ev-cta:hover {
+  background: var(--primary-hover);
+}
+@media only screen and (max-width: 575px) {
+  .ev-header {
+    padding: 16px 0;
+  }
+  .ev-cta {
+    font-size: 12px;
+    padding: 11px 18px;
+  }
+}
+
+/* ===== Testimonial section: tidy on mobile (kill scattered decor) ===== */
+@media only screen and (max-width: 991px) {
+  .testimonial-wrapper1 .avatar1,
+  .testimonial-wrapper1 .avatar2,
+  .testimonial-wrapper1 .avatar3,
+  .testimonial-wrapper1 .avatar4,
+  .testimonial-wrapper1 .avatar5,
+  .testimonial-wrapper1 .avatar6,
+  .testimonial-wrapper1 .svg-shape,
+  .testimonial-wrapper1 .svg-shape-2 {
+    display: none !important;
+  }
+  .testimonial-1 {
+    padding: 10px 14px;
+    text-align: center;
+  }
+  .testimonial-1 .testimonial-text {
+    max-width: 100% !important;
+  }
+  .testimonial-swiper,
+  .testimonial-swiper .swiper-slide {
+    width: 100% !important;
+  }
+}
+
+/* ===== Services detail modal ===== */
+.ev-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: rgba(15, 12, 11, 0.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: evFade 0.2s ease;
+}
+@keyframes evFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.ev-modal {
+  background: #fff;
+  border-radius: 18px;
+  max-width: 560px;
+  width: 100%;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+  animation: evPop 0.22s ease;
+}
+@keyframes evPop {
+  from {
+    transform: translateY(14px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .ev-modal {
+    padding: 28px 22px;
+  }
+}
+.ev-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: #f3f3f4;
+  color: #333;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.ev-modal-close:hover {
+  background: var(--primary);
+  color: #fff;
+}
+.ev-modal .ev-modal-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background: var(--rgba-primary-1, rgba(255, 45, 45, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+.ev-modal .ev-modal-icon img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+.ev-modal h3 {
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+  color: #1c1c1c;
+  font-size: 26px;
+  margin: 0 0 14px;
+}
+.ev-modal p {
+  color: #5a5a5a;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 14px;
+}
+.ev-modal .ev-modal-cta {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--primary);
+  color: #fff !important;
+  font-family: Oswald, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.15s;
+}
+.ev-modal .ev-modal-cta:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
