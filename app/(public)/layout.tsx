@@ -2,6 +2,10 @@ import Header from "@/components/bodyshape/Header";
 import Footer from "@/components/bodyshape/Footer";
 import ScrollTop from "@/components/bodyshape/ScrollTop";
 
+// Bump on every CSS/asset change — busts browser/proxy cache of the
+// fixed-URL static stylesheets (otherwise mobile keeps the stale CSS).
+export const ASSET_V = "9";
+
 export default function PublicLayout({
   children,
 }: {
@@ -16,12 +20,12 @@ export default function PublicLayout({
       />
       <link rel="stylesheet" href="/assets/vendor/swiper/swiper-bundle.min.css" />
       <link rel="stylesheet" href="/assets/vendor/switcher/switcher.css" />
-      <link rel="stylesheet" href="/assets/css/style.css" />
+      <link rel="stylesheet" href={`/assets/css/style.css?v=${ASSET_V}`} />
       {/* skin-1 defines --gradient / --primary-shadow used by highlighted
           section words; without it those texts render transparent */}
-      <link rel="stylesheet" href="/assets/css/skin/skin-1.css" />
+      <link rel="stylesheet" href={`/assets/css/skin/skin-1.css?v=${ASSET_V}`} />
       {/* eVitality custom overrides — must load last */}
-      <link rel="stylesheet" href="/assets/css/evitality.css" />
+      <link rel="stylesheet" href={`/assets/css/evitality.css?v=${ASSET_V}`} />
 
       <div className="page-wraper">
         <Header />

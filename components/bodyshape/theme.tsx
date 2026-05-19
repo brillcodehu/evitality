@@ -1,7 +1,12 @@
 /* Ported from bodyshape template constants/theme.js — image paths point to /assets */
 import { FooterMap } from "./FooterMap";
 
-const img = (p: string) => `/assets/images/${p}`;
+// Custom eVitality images change content under the same filename; bust cache.
+const IMG_V = "9";
+const img = (p: string) =>
+  p.startsWith("evitality/")
+    ? `/assets/images/${p}?v=${IMG_V}`
+    : `/assets/images/${p}`;
 
 export const IMAGES = {
   BgImage1: img("background/bg1.png"),
