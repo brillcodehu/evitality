@@ -2,7 +2,7 @@
 import { FooterMap } from "./FooterMap";
 
 // Custom eVitality images change content under the same filename; bust cache.
-const IMG_V = "9";
+const IMG_V = "10";
 const img = (p: string) =>
   p.startsWith("evitality/")
     ? `/assets/images/${p}?v=${IMG_V}`

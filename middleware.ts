@@ -55,11 +55,15 @@ export const config = {
   matcher: [
     /*
      * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public folder files
+     * - _next/static, _next/image (Next internals)
+     * - favicon.ico
+     * - /assets (bodyshape template static files: css, fonts, images, vendor)
+     * - any static asset file extension
+     *
+     * NOTE: previously only image extensions were excluded, so every
+     * .css / font request was redirected to /login (307) and the whole
+     * site loaded completely unstyled.
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|assets/|.*\\.(?:css|js|mjs|map|json|svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf|otf|eot)$).*)",
   ],
 };
