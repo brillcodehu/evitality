@@ -4,7 +4,7 @@ import ScrollTop from "@/components/bodyshape/ScrollTop";
 
 // Bump on every CSS/asset change — busts browser/proxy cache of the
 // fixed-URL static stylesheets (otherwise mobile keeps the stale CSS).
-export const ASSET_V = "13";
+export const ASSET_V = "14";
 
 export default function PublicLayout({
   children,
