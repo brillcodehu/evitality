@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "./Link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
 import { IMAGES } from "./theme";
 
 const dataBlog = [
